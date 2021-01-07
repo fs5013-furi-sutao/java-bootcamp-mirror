@@ -11,7 +11,7 @@ module.exports = {
         description: 'およそ 250 時間で Java 言語とプログラミングの 基礎 ～ 発展的内容までの知識と技能を手に入れるフリースタイル ITS 所属の方向けのプログラムです',
         baseDirectory: path.resolve(__dirname, '../'),
         author: 'Hashimoto Natsuki',
-        sections: ['Java Bootcamp', '01.イントロ', '02.入門編'],
+        sections: ['Java Bootcamp', '01.イントロ', '02.入門編', '03.初級編'],
         navItems: [{ title: 'ホーム', url: '/home/' }],
         // twitterAccount: 'neoziro',
         githubRepositoryURL: 'https://github.com/fs5013-furi-sutao/java-bootcamp',
