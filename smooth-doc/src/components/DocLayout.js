@@ -10,7 +10,7 @@ import styled, {
 import { useDialogState, Dialog, DialogDisclosure } from 'reakit/Dialog'
 import { Portal } from 'reakit/Portal'
 import { VscChevronUp } from 'react-icons/vsc'
-import { RiPencilLine } from 'react-icons/ri'
+// import { RiPencilLine } from 'react-icons/ri'
 import { ScreenContainer } from './ScreenContainer'
 import { SideNav, useSideNavState, useSideNavPrevNext } from './SideNav'
 import { PageLayout } from './PageLayout'
@@ -201,7 +201,7 @@ export function DocLayout({ children, tableOfContents, editLink, ...props }) {
           <Box pb={6} px={3}>
             <Article>
               {children}
-              {editLink && (
+              {/* {editLink && (
                 <Box
                   mt={5}
                   display="grid"
@@ -213,7 +213,7 @@ export function DocLayout({ children, tableOfContents, editLink, ...props }) {
                 >
                   <RiPencilLine /> Edit this page on GitHub
                 </Box>
-              )}
+              )} */}
               <PrevNextLinks {...sideNav} />
             </Article>
           </Box>

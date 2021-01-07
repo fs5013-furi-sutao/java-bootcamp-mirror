@@ -5,61 +5,149 @@ slug: /primary/20-duplicate-process-like-copy-and-paste
 order: 20
 ---
 
-# 20. 不吉なにおい 🐽コピペのように処理を複製する
+# 20. 不吉なにおい 🐽 コピペのように処理を複製する
 
-<p class="goal">⭐</p>
+<p class="goal">
+  重複処理がいたるところにあると、処理の見通しも悪くなり、同じ改修を複数やらなければならず、
+  修正漏れが起きた場合、バグも起きてしまうことを知る
+</p>
 
 ## 学習
 
-### ⭐を知る
+### あれ？同じようなコードがあちこちに
 
-⭐とは何か、Java で⭐を使う方法を Web で調べてください。検索キーワードは、「 [java 配列](https://www.google.com/search?q=java+配列) 」です。3 種類ぐらい説明記事やサンプルコードを読んで、⭐とは何かを知り、⭐の使い方をつかみましょう。
+「あれ？何かこのコードとそっくりな箇所、どこかで見たような・・・」
+
+これは、「重複したコード」(Duplicate Code) という「不吉なにおい」の特徴です。
+
+重複したコードというのは、複数の箇所に似たようなコードが散らばっている状態です。コードを安易にコピぺして処理を作ってしまうと、重複したコードがあちこちに散らばることになります。
+
+コードが重複してしまうと、修正がしにくくなります。見つかったバグを取る時に、たくさんの箇所を修正するはめになるからです。
+
+### コピペコーディングの害
+
+コピペコーディングの害は、コードの量自体の増大やそれにともなう見通しの悪さだけではないです。
+
+コピペ元の誤り（if 文の条件漏れなど）がそのまま伝播していき、バグがプロジェクト全体に広がっていくこともあり得ます。
+
+また、バグを修正していくにしても、同じような部分を全て差分を見ながら、手で直していくという時間の掛かる作業が後々発生させることにもつながってしまうのです。
+
+### 重複したコードはどうする？
+
+重複したコードを見つけたら、まとまりを探してクラスやメソッドに切り出すようなリファクタリングを検討します。
 
 ## ミニ課題（時間: 20 分）
 
-main メソッドに以下の 5 つの処理を記述して、プログラム実行結果が以下に示したようになるように VariousArrays クラスを作成しなさい
+次のプログラム IcecreamPrices.java について、重複した計算がなくなるようにリファクタリングしなさい
 
-### 1. 定数宣言:
+### src/IcecreamPrices.java
 
-- 定数「INDEX_TO_WATCH」を宣言し、「2」を代入する
+```java
+public class IcecreamPrices {
 
-### 2. int 配列の初期化と表示処理:
+    private static final String ICECREAM_CONTENT_FORMAT
+        = "%d 個盛り %s アイスの値段: %.0f 円 %n";
 
-- int 配列「intEmptyArray」を 3 つの要素数で初期化
-- 「intEmptyArray」の「INDEX_TO_WATCH」番目の要素を表示
+    public static void main(String[] args) {
 
-### 3. String 配列の初期化と表示処理:
+        IceCream ic = new IceCream();
+        ic.flavor = "ピスタチオ";
+        ic.numberOfScoops = 2;
 
-- String 配列「strEmptyArray」を 5 つの要素数で初期化
-- 「strEmptyArray」の「INDEX_TO_WATCH」番目の要素を表示
+        System.out.printf(
+            ICECREAM_CONTENT_FORMAT,
+            ic.numberOfScoops,
+            ic.flavor,
+            ic.numberOfScoops * ic.pricePerScoop
+        );
 
-### 4. String 配列の初期化と表示処理:
+        FruitSaladWithIceCream fs
+            = new FruitSaladWithIceCream();
+        fs.flavor = "チョコレート";
+        fs.numberOfScoops = 1;
+        fs.gramsOfFruitSalad = 50;
 
-- int 配列「idArray」を 3 つの要素数で初期化
-- 「idArray」の 0 番目に「100」を代入
-- 「idArray」の 1 番目に「101」を代入
-- 「idArray」の 2 番目に「102」を代入
-- 「idArray」の「INDEX_TO_WATCH」番目の要素を表示
+        System.out.printf(
+            "%d グラムのフルーツサラダと ",
+            fs.gramsOfFruitSalad
+        );
+        System.out.printf(
+            ICECREAM_CONTENT_FORMAT,
+            fs.numberOfScoops,
+            fs.flavor,
+            fs.getFruitSaladWithIceCreamPrice()
+        );
 
-### 5. String 配列の初期化と表示処理:
+        PancakeWithIceCream pancakeWithIceCream
+            = new PancakeWithIceCream();
+        pancakeWithIceCream.flavor = "バニラ";
+        pancakeWithIceCream.numberOfScoops = 1;
+        pancakeWithIceCream.gramsOfPancake = 75;
 
-- String 配列「namesArray」に以下の 5 つの要素を代入して宣言
-- 一堂零
-- 山本一郎
-- すきやばし次郎
-- 南島三郎
-- 伊藤四郎
-- 「namesArray」の「INDEX_TO_WATCH」番目の要素を表示
+        System.out.printf(
+            "%d グラムのパンケーキと ",
+            pancakeWithIceCream.gramsOfPancake
+        );
+        System.out.printf(
+            ICECREAM_CONTENT_FORMAT,
+            pancakeWithIceCream.numberOfScoops,
+            pancakeWithIceCream.flavor,
+            pancakeWithIceCream.getPancakeWithIceCreamPrice()
+        );
+    }
+}
 
-### VariousArrays の実行結果
+class IceCream {
+    String flavor;
+    int numberOfScoops;
+    double pricePerScoop;
+
+    IceCream() {
+        this.pricePerScoop = 35.0;
+    }
+}
+
+class FruitSaladWithIceCream extends IceCream {
+    int gramsOfFruitSalad;
+    double pricePerGram;
+
+    FruitSaladWithIceCream() {
+        super();
+        pricePerGram = 0.75;
+    }
+
+    double getFruitSaladWithIceCreamPrice() {
+        double iceCreamPrice = numberOfScoops * pricePerScoop;
+
+        return gramsOfFruitSalad * pricePerGram + iceCreamPrice;
+    }
+}
+
+class PancakeWithIceCream extends IceCream {
+    int gramsOfPancake;
+    double pricePerGram;
+
+    PancakeWithIceCream() {
+        super();
+        pricePerGram = 1.25;
+    }
+
+    double getPancakeWithIceCreamPrice() {
+        double iceCreamPrice = numberOfScoops * pricePerScoop;
+
+        return gramsOfPancake * pricePerGram + iceCreamPrice;
+    }
+}
+```
+
+### IcecreamPrices の実行結果
 
 ```
-intEmptyArray の 2 番目の要素 = 0
-strEmptyArray の 2 番目の要素 = null
-idArray の 2 番目の要素 = 102
-namesArray の 2 番目の要素 = すきやばし次郎
+2 個盛り ピスタチオ アイスの値段: 70 円
+50 グラムのフルーツサラダと 1 個盛り チョコレート アイスの値段: 73 円
+75 グラムのパンケーキと 1 個盛り バニラ アイスの値段: 129 円
 ```
 
 ## 解答例
 
-https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/27.array/src/VariousArrays.java
+https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/03.primary/20.duplicate-process-like-copy-and-paste/src/IcecreamPrices.java
