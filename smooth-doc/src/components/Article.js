@@ -28,7 +28,7 @@ export const Article = styled.article`
     font-size: 18;
     font-weight: 300;
     color: on-background-light;
-    margin: 2 0 !important;
+    /*margin: 2 0 !important;*/
 
     ${up(
       'xl',
@@ -225,5 +225,56 @@ export const Article = styled.article`
     &:hover {
       color: on-background-primary-dark;
     }
+  }
+
+  p.goal {
+    position: relative;
+    color: #777;
+    background: #fdf7e5;
+    line-height: 1.4;
+    padding: 1em 1em;
+    margin: 3em 0 2em !important;
+    border-radius: 0 5px 5px 5px;
+  }
+
+  p.goal:after {
+    /*タブ*/
+    position: absolute;
+    content: 'この項目のゴール';
+    background: #9966cc;
+    color: #fff;
+    left: 0px;
+    bottom: 100%;
+    border-radius: 5px 5px 0 0;
+    padding: 7px 10px;
+    /*font-size: 0.7em;*/
+    font-size: 16;
+    line-height: 1;
+    letter-spacing: 0.05em;
+  }
+
+  p.game-content {
+    position: relative;
+    color: #777;
+    background: #fdf7e5;
+    line-height: 1.4;
+    padding: 1em 1em;
+    margin: 4em 0 2em;
+    border-radius: 0 5px 5px 5px;
+  }
+
+  p.game-content:after {
+    /*タブ*/
+    position: absolute;
+    content: 'ゲーム作成課題';
+    background: #9966cc;
+    color: #fff;
+    left: 0px;
+    bottom: 100%;
+    border-radius: 5px 5px 0 0;
+    padding: 7px 10px;
+    /*font-size: 0.7em;*/
+    line-height: 1;
+    letter-spacing: 0.05em;
   }
 `
