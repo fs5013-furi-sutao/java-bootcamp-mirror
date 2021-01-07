@@ -1,19 +1,20 @@
 const path = require('path')
 
 module.exports = {
+  pathPrefix: "/java-bootcamp",
   plugins: [
     {
       resolve: 'smooth-doc',
       options: {
-        name: 'Smooth DOC',
-        siteUrl: 'https://smooth-doc.com',
-        description: 'Ready to use documentation theme for Gatsby.',
+        name: 'Java Bootcamp',
+        siteUrl: 'https://fs5013-furi-sutao.github.io/java-bootcamp/',
+        description: 'およそ 250 時間で Java 言語とプログラミングの 基礎 ～ 発展的内容までの知識を手に入れるフリースタイル ITS 所属の方向けのプログラム',
         baseDirectory: path.resolve(__dirname, '../'),
-        author: 'Greg Bergé',
-        sections: ['About', 'Guide', 'Components', 'Reference'],
-        navItems: [{ title: 'Docs', url: '/docs/' }],
-        twitterAccount: 'neoziro',
-        githubRepositoryURL: 'https://github.com/gregberge/smooth-doc/',
+        author: 'Hashimoto Natsuki',
+        sections: ['Java Bootcamp', '01.イントロ', '02.入門編'],
+        navItems: [{ title: 'ホーム', url: '/home/' }],
+        // twitterAccount: 'neoziro',
+        githubRepositoryURL: 'https://github.com/fs5013-furi-sutao/java-bootcamp',
         carbonAdsURL:
           '//cdn.carbonads.com/carbon.js?serve=CE7IL2JN&placement=xstyleddev',
         docSearch: {
