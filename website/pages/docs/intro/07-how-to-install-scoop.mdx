@@ -1,0 +1,54 @@
+---
+title: 07. Scoop のインストール方法
+section: 01.イントロ
+slug: /intro/07-how-to-install-scoop
+order: 7
+---
+
+# 07. Scoop のインストール方法
+
+Scoop のインストール方法は、公式サイトに記載がある。インストール自体は、コマンド 1 つでできるようになっている。
+
+## PowerShell の起動
+
+コマンドの実行には、PowerShell が必要なので、PowerShell を開く。
+
+Win キーを押した後、'powershell' と押し、検索結果に PowerShell が表示されたら、Enter を押す。これで PowerShell が起動する。
+
+## 実行ポリシーの変更
+
+まず、ユーザの実行ポリシーを以下のコマンドで `RemoteSigned` にする。
+
+```console
+Set-ExecutionPolicy RemoteSigned -scope CurrentUser
+```
+
+インターネットからダウンロードされたスクリプトおよび構成ファイルが、信頼された発行元かどうかを確認し、良いと認められれば、実行されるポリシーである。
+
+## Scoop のインストール
+
+以下のコマンドでインストールを実行する。
+
+```console
+Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
+```
+
+上記のコマンドを短縮したバージョンが以下のコマンドになる。
+
+```console
+iwr -useb get.scoop.sh | iex
+```
+
+Scoop をインストールする中で、`git` と `7zip` が必要になる。
+
+~~そのため、ユーザの要求がなくとも、この 2 つのアプリはデフォルトでインストールされる。~~
+現在は、デフォルトで Git がインストールされなくなったので、別途インストールを行う。
+
+`git` は、Scoop の仕組みを構築するために必要で、`7zip` は圧縮ファイルを展開するために必要になる。
+`git` さえインストールすれば、Scoop が自動的に `7zip` もインストールしてくれるので、Git をインストールする。
+
+```console
+scoop install git
+```
+
+Scoop のインストールは以上。

@@ -1,0 +1,126 @@
+---
+title: 07. 補完機能でコーディングをスピードアップしよう
+section: 02.入門編
+slug: /entry/07-vscode-auto-complete
+order: 7
+---
+
+# 07. 補完機能でコーディングをスピードアップしよう
+
+<p class="goal">
+  自動補完機能を使えば、コーディングミスなく、コーディング速度もアップできることを知る。どんな
+  IDE にも自動補完機能があることを知る
+</p>
+
+VSCode には自動補完機能がある。
+
+補完機能とは、入力された文字列から推測して、ユーザの入力を補助してくれる機能のことだ。
+
+以下の例を見てみよう。
+
+## 今回のサンプルコード
+
+例えば、次のような簡単なコードを例にとって、補完機能を使ってみる。
+
+```java
+public class App {
+
+    public static void main(String[] args) {
+        System.out.println("Hello world.");
+    }
+}
+```
+
+## 補完機能を利用するコーディング手順
+
+補完を効かせながらコーディングする流れは次の通り。
+
+1. `class` と入力
+2. 候補に `class` と `class template` がリストアップ表示される
+3. `class template` を選択
+4. Enter で決定
+
+```java
+/**
+ * App
+ */
+public class App {
+
+
+}
+```
+
+5. `main` と入力
+6. 候補のトップに `main template` がリストアップ表示される
+7. `main template` を選択
+8. Enter で決定
+
+```java
+/**
+ * App
+ */
+public class App {
+
+    public static void main(String[] args) {
+
+    }
+}
+```
+
+9. `sysout` と入力
+10. 候補に `sysout template` のみがリストアップ表示される
+11. Enter で決定
+
+```java
+/**
+ * App
+ */
+public class App {
+
+    public static void main(String[] args) {
+        System.out.println("Hello world.");
+    }
+}
+```
+
+12. `"Hello world."` を入力
+13. ファンクションキー `F5` を押す
+14. プログラムの実行結果が表示される
+
+![VSCode 自動補完機能の使用例](./images/coding_and_running.gif)
+
+スピードアップを意識して、どんどんコーディングをファンキーにしていこう～
+
+## ミニ課題（時間: 20 分）
+
+次のプログラムを、IDE の自動補完機能を使って、プログラムを作成しなさい。
+
+main メソッドに以下の 2 つの処理を記述して、プログラム実行結果が以下に示したようになるようにプログラム IdeAutoCompleted.java を作成しなさい。
+
+### 1. 変数宣言、変数への代入処理:
+
+- 変数「父親の年齢」に 42 を代入
+- 変数「母の年齢」に 38 を代入
+- 変数「ぼくの年齢」に 20 を代入
+- 変数「ぼくの体重（kg）」に 670 を代入
+
+### 2. 変数に代入した数値の表示処理:
+
+- 「父親の年齢」を表示
+- 「母の年齢」を表示
+- 「ぼくの年齢」を表示
+- 「ぼくの体重（kg）」を表示
+
+### プログラム実行結果
+
+```
+ぼくのパパの年齢は 42 歳です.
+ぼくのママの年齢は 38 歳です.
+ぼくの年齢は 20 歳です.
+
+ぼくの体重は 670Kg です.
+```
+
+## 解答例
+
+https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/07.vscode-auto-complete/src/IdeAutoCompleted.java

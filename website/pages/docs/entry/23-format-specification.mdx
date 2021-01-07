@@ -1,0 +1,95 @@
+---
+title: 23. Java での書式指定
+section: 02.入門編
+slug: /entry/23-format-specification
+order: 23
+---
+
+# 23. Java での書式指定
+
+<p class="goal">
+  System.out.printf() または String.format()
+  を使って、数値や文字列に書式を設定できるようになること。 NumberFormat クラスや
+  DecimalFormat クラスを使って、通貨やパーセンテージを表示できるようになること。
+  都度、調べれば目的に合った書式設定の方法をネットで見つけられるようになること
+</p>
+
+## 学習
+
+### 目的に合った書式を設定する方法を知る
+
+Java で書式指定する方法を Web で調べてください。検索キーワードは、「 [java 論理演算子](https://www.google.com/search?q=java+書式指定) 」です。3 種類ぐらい説明記事やサンプルコードを読んで、様々な書式指定をざっくり見ておきましょう。
+
+手軽に使える書式設定には `System.out.printf()` や `String.format()` があるが、NumberFormat や DecimalFormat など、金額やパーセンテージのフォーマットに便利なクラスがあることも、ざっくり調べて知っておきましょう。
+
+また、短絡評価（ショートサーキット）とは何かも調べてください。検索キーワードは、「 [java ショートサーキット](https://www.google.com/search?q=java+ショートサーキット) 」です。
+
+## ミニ課題 01: 文字列変数をメッセージに組み込む（時間: 20 分）
+
+文字列「山本一郎」をメッセージに組み込み、そのメッセージを表示させる処理を main メソッドに持つ NamePrintMessageBuilder クラスを作成しなさい
+
+### NamePrintMessageBuilder の実行結果
+
+```
+ぼくの名前は 山本一郎 です.
+```
+
+## 解答例
+
+https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/23.format-specification/src/NamePrintMessageBuilder.java
+
+## ミニ課題 02: 数値変数と文字列変数をメッセージに組み込む（時間: 20 分）
+
+数値変数「7777」と文字列「キロ」をメッセージに組み込み、そのメッセージを表示させる処理を main メソッドに持つ WeightPrintMessageBuilder クラスを作成しなさい
+
+### WeightPrintMessageBuilder の実行結果
+
+```
+ぼくの体重は 7777 キロです.
+```
+
+## 解答例
+
+https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/23.format-specification/src/WeightPrintMessageBuilder.java
+
+## ミニ課題 03: 数字を桁数分ゼロ埋めして表示（時間: 20 分）
+
+数値変数「50」を 8 桁分ゼロ埋めして表示する処理を main メソッドに持つ ZeroPaddingFormatter クラスを作成しなさい
+
+### ZeroPaddingFormatter の実行結果
+
+```
+00000050
+```
+
+## 解答例
+
+https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/23.format-specification/src/ZeroPaddingFormatter.java
+
+## ミニ課題 04: 金額表示（時間: 20 分）
+
+123456789 円のノートの値段を「￥ 123,456,789」と表示する処理を main メソッドに持つ YenFormatter クラスを作成しなさい
+
+### YenFormatter の実行結果
+
+```
+￥123,456,789
+```
+
+## 解答例
+
+https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/23.format-specification/src/YenFormatter.java
+
+## ミニ課題 05: パーセント表示（時間: 20 分）
+
+年率 123456.78935465 の会社成長率を「12,345,678.94%」と表示する処理を main メソッドに持つ PercentFormatter クラスを作成しなさい
+
+### PercentFormatter の実行結果
+
+```
+12,345,678.94%
+```
+
+## 解答例
+
+https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/23.format-specification/src/PercentFormatter.java
