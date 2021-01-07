@@ -23,10 +23,10 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - run: cd /home/runner/work/java-bootcamp/java-bootcamp/website
-      - run: ls -la
-      - run: yarn
-      - run: yarn build
+            
+      - name: Build gatsby
+        working-directory: ./website
+        run: yarn && yarn build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
