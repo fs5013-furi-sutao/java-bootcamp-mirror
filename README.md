@@ -13,5 +13,15 @@ cd ./website
 ```
 
 ```console
-yarn dev
+yarn start
+```
+
+## Deploy
+
+```console
+yarn add --dev gh-pages
+```
+
+```console
+yarn deploy
 ```
