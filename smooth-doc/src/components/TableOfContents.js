@@ -160,7 +160,7 @@ export function TableOfContents() {
   if (!headings.length) return null
   return (
     <TocContainer ref={ref}>
-      <h4>On this page</h4>
+      <h4>このページの概要</h4>
       <ul>
         {headings.map((heading, i) =>
           heading.url ? (
