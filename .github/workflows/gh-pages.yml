@@ -23,7 +23,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - run: pwd
+      - run: cd ./website
       - run: ls -la
       - run: yarn
       - run: yarn build
