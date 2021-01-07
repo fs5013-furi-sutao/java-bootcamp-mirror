@@ -6,6 +6,7 @@
     "website"
   ],
   "scripts": {
+    "build": "cd ./website && gatsby build --prefix-paths",
     "format": "prettier --write \"**/*.{js,md,mdx}\"",
     "lint": "eslint ."
   },
