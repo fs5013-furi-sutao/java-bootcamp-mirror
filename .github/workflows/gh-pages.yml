@@ -23,9 +23,8 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - run: cd ./website
       - run: yarn
-      - run: yarn build
+      - run: ./node_modules/.bin/gatsby build --prefix-paths
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
