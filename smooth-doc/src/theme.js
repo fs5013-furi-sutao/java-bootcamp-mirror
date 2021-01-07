@@ -37,8 +37,208 @@ export const theme = {
       -moz-osx-font-smoothing: grayscale;
     }
 
+    article a:not(.anchor) {
+      text-decoration: none !important;
+      border-bottom: 1px dotted #ccb2e6;
+    }
+
     :focus {
       outline-color: primary;
+    }
+
+    aside {
+      ::-webkit-scrollbar {
+        overflow: hidden;
+        width: 3px;
+      }
+      ::-webkit-scrollbar:horizontal {
+        height: 1px;
+      }
+      ::-webkit-scrollbar-button {
+        display: none;
+      }
+      ::-webkit-scrollbar-piece {
+      }
+      ::-webkit-scrollbar-piece:start {
+      }
+      ::-webkit-scrollbar-thumb {
+      }
+      ::-webkit-scrollbar-corner {
+      }
+    }
+
+    aside:hover {
+      ::-webkit-scrollbar {
+        overflow: hidden;
+        width: 3px;
+        background: #fafafa;
+      }
+      ::-webkit-scrollbar:horizontal {
+        height: 1px;
+      }
+      ::-webkit-scrollbar-button {
+        display: none;
+      }
+      ::-webkit-scrollbar-piece {
+        background: #eee;
+      }
+      ::-webkit-scrollbar-piece:start {
+        background: #eee;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #ccc;
+      }
+      ::-webkit-scrollbar-corner {
+        background: #333;
+      }
+    }
+
+    pre {
+      font-family: Hack, SFMono-Regular, Menlo, Monaco, Consolas,
+        'Liberation Mono', 'Courier New', monospace;
+        padding-top: 2.4em !important;
+    }
+
+    .gatsby-highlight {
+      font-family: Hack, SFMono-Regular, Menlo, Monaco, Consolas,
+        'Liberation Mono', 'Courier New', monospace;
+      font-variant: no-common-ligatures no-discretionary-ligatures
+        no-historical-ligatures no-contextual;
+
+      position: relative;
+      z-index: 0;
+      margin: 0 0 16px 0;
+      overflow: auto;
+
+      .token {
+        font-style: normal !important;
+      }
+    }
+
+    pre[class*='language-'] code {
+      font-family: inherit;
+    }
+
+    pre[class*='language-']::before {
+      background: #d9d7e0 !important;
+      border-radius: 0 0 4px 4px !important;
+      color: #232129 !important;
+      font-size: 12px !important;
+      font-family: inherit !important;
+      letter-spacing: 0.075em !important;
+      line-height: 1 !important;
+      padding: 0.25rem 0.5rem !important;
+      position: absolute !important;
+      /*left: 1rem !important;*/
+      text-align: right !important;
+      text-transform: uppercase !important;
+      /*top: 0 !important;*/
+      margin-top: -3em;
+    }
+
+    pre[class~='language-output']::before {
+      text-transform: capitalize;
+      content: 'output';
+      background: #294e80;
+      color: #fff;
+    }
+
+    pre[class~='language-js']::before,
+    pre[class~='language-javascript']::before {
+      content: 'js';
+      background: #f7df1e;
+    }
+
+    pre[class~='language-jsx']::before {
+      content: 'jsx';
+      background: #61dafb;
+    }
+
+    pre[class~='language-typescript']::before,
+    pre[class~='language-ts']::before {
+      content: 'ts';
+      background: #294e80;
+      color: #fff;
+    }
+
+    pre[class~='language-tsx']::before {
+      content: 'tsx';
+      background: #294e80;
+      color: #fff;
+    }
+
+    pre[class~='language-graphql']::before {
+      content: 'GraphQL';
+      background: #e10098;
+      color: #fff;
+    }
+
+    pre[class~='language-html']::before {
+      content: 'html';
+      background: #005a9c;
+      color: #fff;
+    }
+
+    pre[class~='language-java']::before {
+      text-transform: capitalize;
+      content: 'java';
+      background: #ff9800 !important;
+      color: #fff;
+    }
+
+    pre[class~='language-css']::before {
+      content: 'css';
+      background: #ff9800;
+      color: #fff;
+    }
+
+    pre[class~='language-mdx']::before {
+      content: 'mdx';
+      background: #f9ac00;
+      color: #fff;
+    }
+
+    pre[class~='language-shell']::before {
+      content: 'shell';
+    }
+
+    pre[class~='language-sh']::before {
+      content: 'sh';
+    }
+
+    pre[class~='language-bash']::before {
+      content: 'bash';
+    }
+
+    pre[class~='language-yaml']::before,
+    pre[class~='language-yml']::before {
+      content: 'yaml';
+      background: #ffa8df;
+    }
+
+    pre[class~='language-markdown']::before {
+      content: 'md';
+    }
+
+    pre[class~='language-json']::before,
+    pre[class~='language-json5']::before {
+      content: 'json';
+      background: linen;
+    }
+
+    pre[class~='language-diff']::before {
+      content: 'diff';
+      background: #e6ffed;
+    }
+
+    pre[class~='language-text']::before {
+      content: 'text';
+      background: #fff;
+    }
+
+    pre[class~='language-flow']::before {
+      content: 'flow';
+      background: #e8bd36;
     }
   `,
   'prism-theme': () => ({
@@ -238,12 +438,12 @@ export const theme = {
 
     'purple-50': '#f6f5ff',
     'purple-100': '#edebfe',
-    'purple-200': '#dcd7fe',
+    'purple-200': '#d571ff',
     'purple-300': '#cabffd',
-    'purple-400': '#ac94fa',
-    'purple-500': '#9061f9',
+    'purple-400': '#ff0000',
+    'purple-500': '#ff0000',
     'purple-600': '#7e3af2',
-    'purple-700': '#6c2bd9',
+    'purple-700': '#a39bfc', // '#6c2bd9',
     'purple-800': '#5521b5',
     'purple-900': '#4a1d96',
     purple: th.color('purple-500'),
@@ -258,10 +458,11 @@ export const theme = {
     'pink-700': '#bf125d',
     'pink-800': '#99154b',
     'pink-900': '#751a3d',
-    pink: th.color('pink-500'),
+    pink: th.color('purple'),
 
     // Primary = indigo
-    ...primaryColor('indigo'),
+    // ...primaryColor('indigo'),
+    ...primaryColor('purple'),
 
     primary: th.color('primary-500'),
     'primary-a500': (p) => transparentize(0.5, th.color('primary')(p)),
