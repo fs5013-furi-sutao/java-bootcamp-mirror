@@ -25,7 +25,7 @@ jobs:
             ${{ runner.os }}-node-
             
       - name: Build gatsby
-        working-directory: ./website
+        working-directory: .
         run: yarn && ls -la && yarn build
 
       - name: Deploy
