@@ -8,7 +8,7 @@ module.exports = {
       options: {
         name: 'Java Bootcamp',
         siteUrl: 'https://fs5013-furi-sutao.github.io/java-bootcamp/',
-        description: 'およそ 250 時間で Java 言語とプログラミングの 基礎 ～ 発展的内容までの知識を手に入れるフリースタイル ITS 所属の方向けのプログラム',
+        description: 'およそ 250 時間で Java 言語とプログラミングの 基礎 ～ 発展的内容までの知識と技能を手に入れるフリースタイル ITS 所属の方向けのプログラムです',
         baseDirectory: path.resolve(__dirname, '../'),
         author: 'Hashimoto Natsuki',
         sections: ['Java Bootcamp', '01.イントロ', '02.入門編'],
