@@ -240,6 +240,11 @@ export const theme = {
       content: 'flow';
       background: #e8bd36;
     }
+
+    pre[class~='language-console']::before {
+      content: 'console';
+      background: #ff0000;
+    }
   `,
   'prism-theme': () => ({
     styles: [
