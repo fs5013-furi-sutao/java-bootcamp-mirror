@@ -1,0 +1,160 @@
+---
+title: 19. 作成課題 ⭐ モンスター捕獲ゲーム
+section: 04.中級編
+slug: /mid/19-poke-mon-mon-game
+order: 19
+---
+
+# 19. 作成課題 ⭐ モンスター捕獲ゲーム
+
+<p class="game-content">モンスター捕獲ゲーム</p>
+
+<strong style="color: #ff0000;">
+  この課題は作成が完了したら、教育担当者にコードレビューを依頼してください
+</strong>
+
+## 遊び方
+
+あなたは最強のポ ◯ モンマスターを目指しています。
+１０匹のモンスターが次々と現れてきますので、捕獲玉を使って捕獲しよう！
+モンスターを捕獲できれば、モンスターごとに設定されたポイントを獲得できます。
+３種類ある捕獲玉をうまく使って、高得点を目指そう！
+
+## ゲームの仕様
+
+1. モンスターは 10 匹登場する
+2. 登場するモンスターは出現率を元に毎回ランダムで選択する
+3. モンスターの情報(名前、HP、攻撃、防御)を表示してプレイヤーにアクションを
+   選択させる
+4. プレイヤーは以下のいずれかの行動を行うことができる
+   (1)ノーマル獲得玉を使う(残りｘ個。捕獲成功率：ｘｘ％)
+   (2)スーパー獲得玉を使う(残りｘ個。捕獲成功率：ｘｘ％)
+   (3)ミラクル獲得玉を使う(残りｘ個。捕獲成功率：ｘｘ％)
+   (4)モンスターを見逃す
+5. 所持数が０の捕獲玉を使うことはできない
+6. モンスター毎の捕獲率と、捕獲玉の補正値で捕獲成功判定を行う
+7. 捕獲に成功した場合は、捕獲に成功した旨のメッセージを表示し、次のモンスターを
+   出現させる
+8. 捕獲に失敗した場合は、捕獲に失敗した旨のメッセージを表示し、再度アクションを
+   選択させる
+9. 捕獲玉が１つもなくなった場合、または、１０匹目のモンスターを捕獲もしくは
+   見逃しをした場合はゲームは終了
+10. ゲーム終了後に捕獲したモンスターの一覧と合計獲得ポイントを表示する
+
+## 捕獲玉の一覧
+
+| 名称           | 捕獲率補正 | 所持数 |
+| :------------- | :--------- | :----- |
+| ノーマル捕獲玉 | +0%        | 6 個   |
+| スーパー捕獲玉 | +20%       | 3 個   |
+| ミラクル捕獲玉 | +50%       | 1 個   |
+
+## モンスターの一覧
+
+| 名称     | 捕獲率補正 | 所持数 |
+| :------- | :--------- | :----- |
+| 名前     | HP         | 攻撃   | 防御 | 出現率 | 捕獲成功率 |
+| ザコモン | 30         | 20     | 20 | 30% | 72% |
+| フツモン | 50         | 20     | 30 | 30% | 50% |
+| ツヨモン | 100        | 50     | 30 | 25% | 28% |
+| ボスモン | 100        | 50     | 50 | 10% | 25% |
+| レアモン | 150        | 100    | 100 | 5% | 14% |
+
+## クラス設計
+
+モンスター情報は、モンスタークラス(Monster)を作成して使用する。
+Monster クラスは以下の仕様で実装すること。
+ただし、必要に応じて、フィールド変数、メソッドの追加しても良いものとする。
+
+```java
+public class Monster {
+
+    private String name; // 名前
+    private int hpValue; // HP
+    private int powerValue; // 攻撃
+    private int defenseValue; // 防御
+    private int encountRate; // 発生率
+    private int captureRate; // 捕獲率
+
+    public Monster(
+            String name,
+            int hpValue,
+            int powerValue,
+            int defenseValue,
+            int encountRate,
+            int captureRate) {
+
+    }
+
+    public int getHpValue() {
+        return 0;
+    }
+
+    public int getPowerValue() {
+        return 0;
+    }
+
+    public int getDefenceValue() {
+        return 0;
+    }
+
+    public int getEncountRate() {
+        return 0;
+    }
+
+    public int getCaptureRate() {
+        return 0;
+    }
+
+    /**
+    * 捕獲ポイントを取得（式：(HP+攻撃+防御)*10）
+    * @return 捕獲ポイント
+    */
+    public int calcCaputuredPoint() {
+        return 0;
+    }
+
+    /**
+    * 捕獲できたかどうかの判定を行う
+    * @param correctValue 捕獲率の補正値
+    * @return true: 捕獲成功 / false: 捕獲失敗
+    */
+    public boolean canCaputured(int correctValue) {
+        return true;
+    }
+}
+```
+
+捕獲玉情報は、捕獲玉クラス(CaptureBall)を作成して使用する。
+CaptureBall クラスは以下の仕様で実装すること。
+ただし、必要に応じて、フィールド変数、メソッドの追加しても良いものとする。
+
+```java
+public class CaptureBall {
+
+    private String name; // 名称
+    private int correctValue; // 捕獲率の補正値
+    private int count; // 所持数
+
+    CaptureBall(String name, int correctValue, int count) {
+    }
+
+    public String getName() {
+        return "";
+    }
+
+    public int getCorrectValue() {
+        return 0;
+    }
+
+    public int getCount() {
+        return 0;
+    }
+
+    /**
+    * 捕獲玉を使用する
+    */
+    public void use() {
+    }
+}
+```

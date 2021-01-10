@@ -1,0 +1,77 @@
+---
+title: 10. 作成課題 ⭐ ランキング管理クラス
+section: 04.中級編
+slug: /mid/10-rank-management-class
+order: 10
+---
+
+# 10. 作成課題 ⭐ ランキング管理クラス
+
+<p class="game-content">
+  スコアランキング管理用クラスを作成する。
+  点数が高いものほど順位が高くなるようにする。
+</p>
+
+<strong style="color: #ff0000;">
+  この課題は作成が完了したら、教育担当者にコードレビューを依頼してください
+</strong>
+
+## 課題 1
+
+点数のみを登録できれば良い。
+
+Ranking クラスの使用例と出力は以下の通りである。
+
+### Ranking クラスの使用例
+
+```java
+Ranking ranking = new Ranking();
+ranking.EntryScore(300);
+ranking.EntryScore(100);
+ranking.EntryScore(400);
+ranking.EntryScore(200);
+ranking.PrintRanking();
+
+```
+
+### 出力例
+
+```
+1 位: 400
+2 位: 300
+3 位: 200
+4 位: 100
+```
+
+## 課題 2
+
+点数と名前を登録できるようにする。
+スコアの管理には Score クラスを使用する。
+Score クラスは、以下の変数を保持させる。
+
+| 変数名 | タイプ | 備考 |
+| :----- | :----- | :--- |
+| point  | 数値   | 点数 |
+| name   | 文字列 | 名前 |
+
+Ranking クラスの使用例と出力は以下の通りである。
+
+### Ranking クラスの使用例
+
+```java
+Ranking ranking = new Ranking();
+ranking.EntryScore(300, "name300");
+ranking.EntryScore(100, "name100");
+ranking.EntryScore(400, "name400");
+ranking.EntryScore(200, "name200");
+ranking.PrintRanking();
+```
+
+### 出力例
+
+```
+1 位: name400 400
+2 位: name300 300
+3 位: name200 200
+4 位: name100 100
+```
