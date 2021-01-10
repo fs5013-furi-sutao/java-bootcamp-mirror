@@ -42,6 +42,12 @@ export const theme = {
       border-bottom: 1px dotted #ccb2e6;
     }
 
+    p.gnpluS a {
+      text-decoration: none !important;
+      color: #a39bfc;
+      border-bottom: 1px dotted #ccb2e6;
+    }
+
     :focus {
       outline-color: primary;
     }
