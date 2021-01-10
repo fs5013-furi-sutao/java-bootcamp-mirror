@@ -1,0 +1,159 @@
+---
+title: 08. 作成課題 ⭐ 待ち行列管理クラス
+section: 04.中級編
+slug: /entry/38-cueue-management-class
+order: 8
+---
+
+# 08. 作成課題 ⭐ 待ち行列管理クラス
+
+<p class="game-content">
+  待ち行列管理のクラスを作成する。 待ち行列に要素を追加する push メソッドと、
+  待ち行列から要素を取り出す pop メソッドを持つクラスを作成する。
+</p>
+
+<strong style="color: #ff0000;">
+  この課題は作成が完了したら、教育担当者にコードレビューを依頼してください
+</strong>
+
+## 課題 1
+
+Queue クラスを作成する。
+
+pop メソッドで取り出される要素は、先に入れたものが先に出てくる(FIFO)方式とする。
+
+※この方式を一般的にキューと呼ぶ
+
+Queue クラスの使用例と出力は以下の通りである。
+
+### Queue クラスの使用例
+
+```java
+// Queue クラスを生成
+Queue queue = new Queue();
+
+// キューに追加する
+queue.push("１番目");
+queue.push("２番目");
+queue.push("３番目");
+
+// キューから取り出して表示する
+System.out.println(queue.pop());
+System.out.println(queue.pop());
+System.out.println(queue.pop());
+```
+
+### 出力例
+
+```
+1 番目
+2 番目
+3 番目
+```
+
+## 課題 2
+
+Stack クラスを作成する。
+
+pop メソッドで取り出される要素は、待ち行列に最後に入れたものから先に出てくる(FILO)方式とする。
+
+※この方式を一般的にスタックと呼ぶ
+
+Stack クラスの使用例と出力は以下の通りである。
+
+### Stack クラスの使用例
+
+```java
+// Stack クラスを生成
+
+Stack stack = new Stack();
+
+// スタックに追加する
+stack.push("１番目");
+stack.push("２番目");
+stack.push("３番目");
+
+// スタックから取り出して表示する
+System.out.println(stack.pop());
+System.out.println(stack.pop());
+System.out.println(stack.pop());
+```
+
+### 出力例
+
+```
+3 番目
+2 番目
+1 番目
+```
+
+## 課題 3
+
+RandomQueue クラスを作成する。
+
+Pop メソッドで取り出される要素は、待ち行列からランダムに出てくる方式とする。
+
+RandomQueue クラスの使用例と出力は以下の通りである。
+
+### RandomQueue クラスの使用例
+
+```java
+// RandomQueue クラスを生成
+RandomQueue queue = new RandomQueue();
+
+// キューに追加する
+queue.push("１番目");
+queue.push("２番目");
+queue.push("３番目");
+
+// キューから取り出して表示する
+System.out.println(queue.pop());
+System.out.println(queue.pop());
+System.out.println(queue.pop());
+```
+
+### 出力例
+
+```
+2 番目
+3 番目
+1 番目
+```
+
+## 課題 4
+
+課題１で作成した Queue クラスの push メソッドの引数に、優先度(priority) を追加する。
+
+pop メソッドで取り出される要素は、優先度が高い順に取り出される。
+
+同一の優先順位の要素については、先に入れたものが先に出てくる(FIFO)方式とする。
+
+Queue クラスの使用例と出力は以下の通りである。
+
+### Queue クラスの使用例
+
+```java
+// Queue クラスを生成
+Queue queue = new Queue();
+
+// キューに追加する
+queue.push("1 番目", 10);
+queue.push("2 番目", 10);
+queue.push("3 番目", 100);
+queue.push("4 番目", 50);
+
+// キューから取り出して表示する
+System.out.println(queue.pop());
+System.out.println(queue.pop());
+System.out.println(queue.pop());
+System.out.println(queue.pop());
+```
+
+### 出力例
+
+```
+3 番目
+4 番目
+1 番目
+2 番目
+```
