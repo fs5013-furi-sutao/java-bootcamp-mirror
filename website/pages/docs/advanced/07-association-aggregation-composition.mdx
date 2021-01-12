@@ -63,13 +63,13 @@ order: 7
 
 ## 練習問題 01: 集約 Aggregation（時間: 20 分）
 
-研究所が学科を、学科が院生を集約するように次の 3 つのクラスを作成しなさい
+研究所が学科を、学科が院生を集約する（Aggregation）ように次の 3 つのクラスを作成しなさい
 
 なお、3 つのクラスを以下の ComputerScienceCulture クラスで実行すると、実行結果の通りになること
 
-1. Institute クラス
+1. GraduateStudent クラス
 2. Department クラス
-3. GraduateStudent クラス
+3. Institute クラス
 
 ### ComputerScienceCulture.java
 
@@ -134,3 +134,65 @@ class ComputerScienceCulture {
 ## 解答例
 
 https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/05.advanced/07.association-aggregation-composition/src/advanced/aggregation
+
+## 練習問題 02: 構成 Composition（時間: 20 分）
+
+本が図書館を構成する（Composition）ように次の 2 つのクラスを作成しなさい
+
+なお、2 つのクラスを以下の Librarian クラスで実行すると、実行結果の通りになること
+
+1. Book クラス
+2. Library クラス
+
+### Librarian.java
+
+```java
+package advanced.aggregation.composition;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import advanced.aggregation.composition.entity.Book;
+import advanced.aggregation.composition.entity.Library;
+
+/**
+ * 図書館司書を扱うクラス
+ * 構成 Composition の概念を説明する Java プログラム
+ */
+public class Librarian {
+    public static void main(String[] args) {
+
+        Book[] booksArray = {
+            new Book("Effective Java", "Joshua Bloch"),
+            new Book("Refactoring", "Martin Fowler"),
+            new Book("Clean Coder", "Robert C. Martin"),
+            new Book("Domain-Driven Design", "Eric Evans"),
+        };
+
+        List<Book> books = new ArrayList<>();
+        books.add(booksArray[0]);
+        books.add(booksArray[2]);
+        books.add(booksArray[3]);
+
+        Library library = new Library(books);
+
+        List<Book> allBooksInLibrary = library.getAllBooksInLibrary();
+
+        for (Book book : allBooksInLibrary) {
+            book.showDetails();
+        }
+    }
+}
+```
+
+### Librarian.java の実行結果
+
+```console
+タイトル: Effective Java      , 著者: Joshua Bloch
+タイトル: Clean Coder         , 著者: Robert C. Martin
+タイトル: Domain-Driven Design, 著者: Eric Evans
+```
+
+## 解答例
+
+https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/05.advanced/07.association-aggregation-composition/src/advanced/composition
