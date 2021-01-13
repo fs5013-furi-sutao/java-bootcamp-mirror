@@ -1,0 +1,534 @@
+---
+title: 11. 依存性の注入（DI）
+section: 05.上級編
+slug: /advanced/11-dependency-injection
+order: 11
+---
+
+# 11. 依存性の注入（DI）
+
+<p class="goal">
+  依存性の注入（DI）とは何かが分かり、依存性の注入（DI）のメリットもなんとなく分かり、DI
+  の実装パターンを知る
+</p>
+
+## 学習
+
+### 委譲を知る
+
+依存性の注入は、Dependency Injection (DI) と呼ばれる、プログラムの設計、実装パターンのことです。
+
+依存性の注入（DI）とは何かを Web で調べてください。
+検索キーワードは、「 [java 依存性の注入](https://www.google.com/search?q=java+委譲) 」
+「 [java dependency injection](https://www.google.com/search?q=java+dependency+injection) 」です。
+3 種類ぐらい説明記事やサンプルコードを読んで、Java における「依存性の注入（DI）」とは何か探ってみましょう。
+
+## 依存性の注入とは
+
+Dependency Injection デザインパターンを使用すると、ハードコードされた依存関係をなくし、
+アプリケーションを疎結合、拡張可能、および保守可能にすることができます。
+
+Java で依存性注入を実装して、依存性の解決をコンパイル時から実行時に移動できます。
+
+## ノーマルな実装
+
+・・・と言っても、少し難しい話でまったく分からないと思いますので、まずは「依存性の注入」を使わないノーマルな実装を見てみます。
+
+### 1. EmailService
+
+電子メールを送信するために消費するアプリケーションがあるとしましょう。通常、これは以下のように実装します。
+
+```java
+package advanced.dependency.injection.notdi;
+
+public class EmailService {
+
+	public void sendEmail(String message, String receiver){
+		// メール送信のビジネスロジック
+        System.out.format(
+                "[Email] 送信先: %s, メッセージ: %s %n",
+                receiver, message
+            );
+	}
+}
+```
+
+### 2. MyApplication
+
+MyApplication クラスは、受信者の電子メールアドレスに電子メールメッセージを送信するロジックを保持します。
+アプリケーションコードは以下のようになります。
+
+```java
+package advanced.dependency.injection.notdi;
+
+public class MyApplication {
+    private EmailService email = new EmailService();
+
+	public void processMessages(String message, String receiver){
+		// message のバリデーションやロジック操作などを行う
+		this.email.sendEmail(message, receiver);
+	}
+}
+```
+
+### 3. MyLegacySample
+
+MyApplication クラスを使用して電子メールメッセージを送信するクライアントコードは、次のようになります。
+
+```java
+package advanced.dependency.injection.notdi;
+
+public class MyLegacySample {
+    public static void main(String[] args) {
+
+		MyApplication app = new MyApplication();
+		app.processMessages(
+                "こんにちは、山本一郎さん！",
+                "i_yamamoto@abc.com"
+            );
+	}
+}
+
+```
+
+プログラムの実行結果は次の通りになります。
+
+```
+[Email] 送信先: i_yamamoto@abc.com, メッセージ: こんにちは、山本一郎さん！
+```
+
+一見すると、上記の実装に問題はないようです。ただし、上記のコードロジックには特定の制限があります。
+
+## ノーマルな実装の問題点
+
+https://www.journaldev.com/2394/java-dependency-injection-design-pattern-example-tutorial
+
+### 1. 変更が困難
+
+MyApplication クラスは、電子メールサービスを初期化してから使用する責任があります。
+これにより、依存関係がハードコードされます。将来、他の高度な電子メールサービスに切り替えたい場合は、MyApplication クラスのコードを変更する必要があります。
+
+つまり、アプリケーションの拡張が困難になり、電子メールサービスが複数のクラスで使用されている場合、それはさらに困難になります。
+
+### 2. 機能追加が困難
+
+SMS や Facebook メッセージなどの追加のメッセージング機能を提供するようにアプリケーションを拡張する場合は、
+そのための別のアプリケーションを作成する必要があります。
+
+これには、アプリケーションクラスとクライアントクラスのコード変更も含まれます。
+
+### 3. テストが困難
+
+アプリケーションは電子メールサービスインスタンスを直接作成しているため、アプリケーションのテストは非常に困難です。
+テストクラスでこれらのオブジェクトをモックする方法はありません。
+
+## 最初の代案
+
+MyApplication に引数として電子メールサービスを必要とするコンストラクターを持つことで、
+クラスから電子メールサービスインスタンスの作成を削除できると主張することができます。
+
+### 修正: MyApplication にサービスを注入するコンストラクタを追加
+
+```java
+package advanced.dependency.injection.notdi;
+
+public class MyApplication {
+
+    private EmailService email = null;
+
+    public MyApplication(EmailService service) {
+        this.email = service;
+    }
+
+    public void processMessages(String message, String receiver) {
+        // message のバリデーションやロジック操作などを行う
+        this.email.sendEmail(message, receiver);
+    }
+}
+```
+
+ただし、この場合、クライアントアプリケーションまたはテストクラスに電子メールサービスの初期化を依頼していますが、
+これは設計上の適切な決定ではありません。
+
+## 依存性の注入を取り入れる
+
+次に、依存性の注入パターンを適用して、上記の実装に関するすべての問題を解決する方法を見てみましょう。
+Java での依存性注入には、少なくとも次のものが必要です。
+
+1. Service コンポーネント
+2. Consumer クラス
+3. Injector クラス
+
+### Service コンポーネント
+
+サービスコンポーネントは、基本クラスまたはインターフェイスを使用して設計する必要があります。
+サービスのコントラクトを定義するインターフェイスまたは抽象クラスを優先することをお勧めします。
+
+### Consumer クラス
+
+コンシューマークラスは、サービスインターフェイスの観点から作成する必要があります。
+
+### Injector クラス
+
+サービスを初期化し、次にコンシューマークラスを初期化するインジェクタークラス。
+
+## 依存性注入.1: Service コンポーネント
+
+私たちの場合、MessageService サービス実装の契約を宣言することができます。
+
+### service/IMessageService.java
+
+```java
+package advanced.dependency.injection.di.service;
+
+public interface IMessageService {
+    void sendMessage(String message, String reciever);
+}
+```
+
+ここで、上記のインターフェースを実装する電子メールがあるとしましょう。
+
+### service/EmailServiceImpl.java
+
+```java
+package advanced.dependency.injection.di.service;
+
+public class EmailServiceImpl implements IMessageService {
+
+    @Override
+    public void sendMessage(String message, String receiver) {
+        // メール送信のビジネスロジック
+        System.out.format(
+                "[Email] 送信先: %s, メッセージ: %s %n",
+                receiver, message
+            );
+    }
+ }
+```
+
+同じく、SMS サービスも実装します。
+
+### service/SMSServiceImpl.java
+
+```java
+package advanced.dependency.injection.di.service;
+
+public class SMSServiceImpl implements IMessageService {
+
+    @Override
+    public void sendMessage(String message, String reciever) {
+        // SMS 送信のビジネスロジック
+        System.out.format(
+                "[SMS] 送信先: %s, メッセージ: %s %n",
+                reciever, message
+            );
+    }
+}
+```
+
+依存性注入サービスの準備が整い、Consumer クラスを記述できるようになりました。
+
+## 依存性注入.2: Service Consumer
+
+Consumer クラスの基本インターフェイスは必須にはなりませんが、
+Consumer クラスの契約（取り決め）を宣言するインタフェースを用意します。
+
+### consumer/IConsumer.java
+
+```java
+package advanced.dependency.injection.di.consumer;
+
+public interface IConsumer {
+    void processMessages(String message, String receiver);
+}
+```
+
+Consumer クラスの実装は次のようになります。
+
+### consumer/MyDiApplication.java
+
+```java
+package advanced.dependency.injection.di.consumer;
+
+import advanced.dependency.injection.di.service.IMessageService;
+
+public class MyDiApplication implements IConsumer {
+
+    private IMessageService service;
+
+    public MyDiApplication(IMessageService service) {
+        this.service = service;
+    }
+
+    @Override
+    public void processMessages(String message, String receiver) {
+
+        // message のバリデーション、操作ロジックなどを行う
+        this.service.sendMessage(message, receiver);
+    }
+}
+```
+
+アプリケーションクラスがサービスを使用していることに注意してください。
+より良い「関心の分離」につながるサービスは初期化されません。
+
+また、サービスインタフェースを使用すると、MessageService をモックしてアプリケーションを簡単にテストし、
+コンパイル時ではなく実行時にサービスをバインドできます。
+
+これで、サービスと Consumer クラスを初期化する依存性注入クラスを作成する準備が整いました。
+
+## 依存性注入.3: Injector クラス
+
+Consumer クラスを返すメソッド宣言を備えた MessageServiceInjector インタフェースを用意しましょう。
+
+### injector/IMessageServiceInjector.java
+
+```java
+package advanced.dependency.injection.di.injector;
+
+import advanced.dependency.injection.di.consumer.IConsumer;
+
+public interface IMessageServiceInjector {
+    public IConsumer getConsumer();
+}
+```
+
+これで、すべてのサービスについて、以下のような Injector クラスを作成する必要があります。
+
+### injector/EmailServiceInjector.java
+
+```java
+package advanced.dependency.injection.di.injector;
+
+import advanced.dependency.injection.di.consumer.IConsumer;
+import advanced.dependency.injection.di.consumer.MyDiApplication;
+import advanced.dependency.injection.di.service.EmailServiceImpl;
+
+public class EmailServiceInjector implements IMessageServiceInjector {
+
+    @Override
+    public IConsumer getConsumer() {
+        return new MyDiApplication(new EmailServiceImpl());
+    }
+}
+```
+
+### injector/SMSServiceInjector.java
+
+```java
+package advanced.dependency.injection.di.injector;
+
+import advanced.dependency.injection.di.consumer.IConsumer;
+import advanced.dependency.injection.di.consumer.MyDiApplication;
+import advanced.dependency.injection.di.service.SMSServiceImpl;
+
+public class SMSServiceInjector implements IMessageServiceInjector {
+    @Override
+    public IConsumer getConsumer() {
+        return new MyDiApplication(new SMSServiceImpl());
+    }
+}
+```
+
+次に、クライアントアプリケーションが単純なプログラムでアプリケーションをどのように使用するかを見てみましょう。
+
+### MyMessageDiTest.java
+
+```java
+package advanced.dependency.injection.di;
+
+import advanced.dependency.injection.di.consumer.IConsumer;
+import advanced.dependency.injection.di.injector.EmailServiceInjector;
+import advanced.dependency.injection.di.injector.IMessageServiceInjector;
+import advanced.dependency.injection.di.injector.SMSServiceInjector;
+
+public class MyMessageDiTest {
+    public static void main(String[] args) {
+        String message  = "こんにちは、山本一郎さん！";
+        String email = "i_yamamoto@abc.com";
+        String phone = "";
+
+        IMessageServiceInjector injector = null;
+        IConsumer app = null;
+
+        injector = new EmailServiceInjector();
+        app = injector.getConsumer();
+        app.processMessages(message, email);
+
+        injector = new SMSServiceInjector();
+        app = injector.getConsumer();
+        app.processMessages(message, phone);
+
+    }
+}
+```
+
+この通り、Application クラスは Service の使用のみを担当しています。
+Service クラスは Injector で作成されます。
+
+また、Facebook メッセージングを許可するようにアプリケーションをさらに拡張する必要がある場合は、
+Service クラスと Injector クラスのみを作成するだけで OK になりました。
+
+そのため、依存性注入の実装により、ハードコードされた依存性の問題が解決され、
+アプリケーションを柔軟で簡単に拡張できるようになりました。
+
+次に、Injector クラスと Service クラスをモックすることで、
+アプリケーションクラスを簡単にテストできるようになることを見てみましょう。
+
+## 依存性注入.4: JUnit テストケース
+
+今回は、匿名クラスを使用して Injector クラスと Service クラスをモックしています。
+アプリケーションメソッドを簡単にテストできることが分かります。
+
+### test/MyDiApplicationJUnitTest.java
+
+```java
+package advanced.dependency.injection.di.test;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import advanced.dependency.injection.di.consumer.IConsumer;
+import advanced.dependency.injection.di.consumer.MyDiApplication;
+import advanced.dependency.injection.di.injector.IMessageServiceInjector;
+import advanced.dependency.injection.di.service.IMessageService;
+
+public class MyDiApplicationJUnitTest {
+
+    private IMessageServiceInjector injector;
+
+    @Before
+    public void setUp() {
+        // 匿名クラスで Injector をモックする
+		injector = new IMessageServiceInjector() {
+
+			@Override
+			public IConsumer getConsumer() {
+				// メッセージ Service をモックする
+				return new MyDiApplication(new IMessageService() {
+
+					@Override
+					public void sendMessage(String message, String receiver) {
+						System.out.format(
+							    "[モック] 送信先: %s, メッセージ: %s %n",
+								receiver, message
+							);
+
+					}
+				});
+			}
+		};
+    }
+
+    @Test
+	public void test() {
+		IConsumer consumer = injector.getConsumer();
+		consumer.processMessages(
+				"こんにちは、山本一郎さん！",
+				"i_yamamoto@abc.com"
+			);
+	}
+
+	@After
+	public void tear(){
+		injector = null;
+	}
+}
+```
+
+コンストラクタを使用してアプリケーションクラスに依存関係を注入しました。
+
+別の方法として考えられるのは、setter メソッドを使用してアプリケーションクラスに依存関係を注入する方法です。
+setter メソッドによる依存性注入の場合、アプリケーションクラスは次のように実装されます。
+
+### consumer/MyDiApplication.java の依存性注入方法を setter にする
+
+```java
+package advanced.dependency.injection.di.consumer;
+
+import advanced.dependency.injection.di.service.IMessageService;
+
+public class MyDiApplication implements IConsumer {
+
+    private IMessageService service;
+
+    // setter による依存性の注入
+	public void setService(IMessageService service) {
+		this.service = service;
+	}
+
+    @Override
+    public void processMessages(String message, String receiver) {
+
+        // message のバリデーション、操作ロジックなどを行う
+        this.service.sendMessage(message, receiver);
+    }
+}
+```
+
+Injector のほうも、setter で依存性を注入するようにします。
+
+### injector/EmailServiceInjector.java で setter で注入するように修正
+
+```java
+package advanced.dependency.injection.di.injector;
+
+import advanced.dependency.injection.di.consumer.IConsumer;
+import advanced.dependency.injection.di.consumer.MyDiApplication;
+import advanced.dependency.injection.di.service.EmailServiceImpl;
+
+public class EmailServiceInjector implements IMessageServiceInjector {
+
+    @Override
+    public IConsumer getConsumer() {
+        MyDiApplication app = new MyDiApplication();
+        app.setService(new EmailServiceImpl());
+        return app;
+    }
+}
+```
+
+## コンストラクタで注入するか？setter で注入するか？
+
+コンストラクターベースの依存性注入を使用するか、セッターベースを使用するかは設計上の決定であり、
+要件によって異なります。
+
+たとえば、アプリケーションが Service クラスなしではまったく機能しない場合は、
+コンストラクターベースの DI を使用するか、setter メソッドベースの DI を使用して、本当に必要な場合にのみ使用します。
+
+Java での依存性注入は、オブジェクトのバインドをコンパイル時から実行時に移動することにより、
+アプリケーションで制御の反転（IoC）を実現する方法です。
+
+IoC は、ファクトリパターン、テンプレートメソッドデザインパターン、ストラテジーパターン、サービスロケーターパターンによっても実現できます。
+
+制御の反転（IoC）については、
+
+[ Spring Dependency Injection ](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-collaborators)、
+[ Google Guice ](https://github.com/google/guice)、
+および [ Java EE CDI フレームワーク ](https://docs.oracle.com/cd/E84527_01/wls/WLPRG/cdi.htm) は、
+[ Java Reflection API ](https://docs.oracle.com/javase/jp/8/docs/technotes/guides/reflection/enhancements.html) と
+[ Java アノテーション ](https://ja.wikipedia.org/wiki/アノテーション#Javaにおけるアノテーション) を使用して、
+依存性注入のプロセスを容易にします。
+
+必要なのは、フィールド、コンストラクタ、または setter メソッドに注釈を付け、構成 xml ファイルまたはクラスでそれらを構成することだけです。
+
+## 依存性注入のメリット
+
+Java で依存性注入を使用するメリットは次のとおりです。
+
+- 関心事の分離
+- 依存関係を初期化するためのすべての作業が Injector コンポーネントによって処理されるため、アプリケーションクラスのボイラープレートコードを削減できる
+- 構成可能なコンポーネントにより、アプリケーションを簡単に拡張できます
+- モックオブジェクトで簡単にユニットテストを実行できる
+
+## 依存性注入のデメリット
+
+依存性注入には、いくつか欠点もあります。
+
+- 使いすぎると、変更の影響が実行時にわかっているため、メンテナンスの問題が発生する可能性がある
+- Java での依存性注入は、コンパイル時にキャッチされたであろうランタイムエラーにつながる可能性のある Service クラスの依存性を隠す
+
+## まとめ
+
+Service を管理する場合、Dependency Injection のメリット/デメリットを知り、実装方法を知ることで柔軟で堅牢なアプリケーションを設計することができます。
