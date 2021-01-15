@@ -1,0 +1,61 @@
+---
+title: 07. 悪い習慣 😈 根本例外を捨てる
+section: 06.マスタ編
+slug: /master/07-bad-habit-remove-original-cause-of-exception
+order: 7
+---
+
+# 07. 悪い習慣 😈 根本例外を捨てる
+
+<p class="goal">
+  根本例外を捨ててしまうと、エラー原因が追いにくくなることを知る
+</p>
+
+## 学習
+
+### 「根本例外を捨てる」とはどういうことか？
+
+「根本例外を捨てる」とは、キャッチした例外を別の例外に変換して上位にスローしてしまう行為のことです。
+
+```java
+try {
+    myService.execute();
+
+} catch (IllegalArgumentException e) {
+    throw new MySystemException();
+}
+```
+
+これをやると根本原因となる Exception がログに表示されないので、これ以上先にエラー原因が追えなくなってしまいます。
+
+## 実業務であるパターン
+
+実業務を想定した場合、例外を別の例外でラップしたくなるのは、次のようなケースです。
+
+あなたのチームは、エラーコードと統一された処理を備えた [自作例外](./04-custom-business-exception) を使用することに決めました。
+原因を取り除けない限り、このアプローチに問題はありません。
+
+しかし、この際に根本例外を捨ててしまうと、不具合が起きた時の原因調査が難しくなってしまいます。
+
+そうならないためには、次の点に注意して実装します。
+
+## 自作例外を作る時の注意点
+
+新しい例外をインスタンス化するときは、常にキャッチされた例外をその原因として設定する必要があります。
+
+そうしないと、例外の原因となった例外イベントを説明するメッセージとスタックトレースが失われます。
+例外クラスとそのすべてのサブクラスは、パラメータとして元の例外を受け入れ、
+原因としてそれを設定し、いくつかのコンストラクタメソッドを提供するようにします。
+
+```java
+try {
+    myService.execute();
+
+} catch (NumberFormatException e) {
+    throw new MyBusinessException(e, ErrorCode.CONFIGURATION_ERROR);
+
+} catch (IllegalArgumentException e) {
+    throw new MyBusinessException(e, ErrorCode.UNEXPECTED);
+
+}
+```

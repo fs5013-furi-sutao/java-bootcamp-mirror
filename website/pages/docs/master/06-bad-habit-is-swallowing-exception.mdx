@@ -13,11 +13,11 @@ order: 6
 
 ## 学習
 
-### チェック例外と非チェック例外を認識する
+### 例外を握りつぶすとはどういうことかを認識する
 
-Java におけるチェック例外と非チェック例外の違いを Web で調べてください。
-検索キーワードは、「 [java 例外 握りつぶし](https://www.google.com/search?q=java+例外+try+catch) 」です。
-3 種類ぐらい説明記事やサンプルコードを読んで、チェック例外と非チェック例外、それぞれの特徴と扱い方をつかみましょう。
+Java の例外を握りつぶすとはどういうことかを Web で調べてください。
+検索キーワードは、「 [java 例外 握りつぶし](https://www.google.com/search?q=java+例外+握りつぶし) 」です。
+3 種類ぐらい説明記事やサンプルコードを読んで、例外を握りつぶすことの危険性を押さえておきましょう。
 
 ### 例外の握りつぶしとは
 
@@ -56,6 +56,13 @@ try {
 システムに取って致命的なエラー（Critical error）を知らないうちに埋め込んでしまいます。
 
 そのため、こうした箇所は「アプリのサイレントキラー」と表現されることもあります。
+
+例外は処理実行時に発生した問題を示してくれます。
+例外を無視や破棄をしてしまうと、不正なプログラムやデータなどを検出する機会を失ってしまうともに、
+不正な状態のままシステムが動き続けてしまい、二次障害にもつながる可能性があります。
+
+例外をキャッチしたにも関わらず、無視・破棄してしまうは絶対にダメ。
+もしそんなコードを先輩に見つけられたら、正座で説教は免れられないでしょう。
 
 比較として、上記の例外に対して try-catch を書かないコードを書いてみます。
 
@@ -207,12 +214,12 @@ public class Librarian {
 
 ```console
 [Title] 檸檬, [Author の登録] あり
-java.lang.NullPointerException
+Exception in thread "main" java.lang.Exception: java.lang.NullPointerException
+        at Librarian.main(Librarian.java:23)
+Caused by: java.lang.NullPointerException
         at Book.showIsBlankAuthor(Book.java:31)
         at Book.showDetails(Book.java:27)
         at Librarian.main(Librarian.java:17)
-[Title] ニコマコス倫理学, [Author の登録] あり
-[Title] こころ, [Author の登録] あり
 ```
 
 ## 解答例
