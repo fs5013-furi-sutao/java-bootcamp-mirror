@@ -32,7 +32,7 @@ Java におけるチェック例外と非チェック例外の違いを Web で�
               |                  |
               |                  |
       ---> Exception           Error
-      |    (チェック例外)        (非チェック例外)
+      |    (チェック例外)        (エラー)
       |
 RuntimeException
   (非チェック例外)
@@ -52,9 +52,19 @@ RuntimeException
 
 Oracle のドキュメントには、メソッドの呼び出し元が回復できると合理的に期待できる場合に、チェックされた例外を使用するように指示されています。
 
-チェックされた例外の例としては、IOException と ServletException があります。
+チェックされた例外の例としては、IOException や ServletException があります。
 
-## 非チェック例外（unchecked exception）
+## チェック例外の例
+
+- IOException(入出力関係の例外)
+- SQLException(DB系の例外)
+- ClassNotFoundException(クラスが見つからない)
+- InstantiationException(インスタンス化不可のクラスをnewした時)
+- InterruptedException(スレッドへの割り込み)
+- NoSuchFieldException(クラスに要求したフィールドがない)
+- NoSuchMethodException(クラスに要求したメソッドがない)
+
+### 非チェック例外（unchecked exception）
 
 チェックされていない例外は、Java コンパイラが処理する必要のない例外です。
 
@@ -62,14 +72,34 @@ Oracle のドキュメントには、メソッドの呼び出し元が回復で�
 
 これは便利に聞こえますが、Oracle のドキュメントには、状況エラー（チェック済み）と使用エラー（チェックなし）を区別するなど、両方の概念に正当な理由があることが示されています。
 
-未チェックの例外の例としては、 NullPointerException、 IllegalArgumentException、 および SecurityException があります。
+非チェックの例外の例としては、 NullPointerException、 IllegalArgumentException、 SecurityException などがあります。
+
+### 非チェック例外の例
+
+- NullPointerException(ぬるぽ)
+- ArrayIndexOutOfBoundsException(配列で存在しない要素へのアクセス)
+- IllegalArgumentException(不正な引数をメソッドに渡した)
+- ArithmeticException(算術例外)
+- ClassCastException(継承関係のないクラスへのキャスト)
+- NegativeArraySizeException(負の値を配列のサイズに指定)
+- SecurityException(セキュリティ違反)
+- TypeNotPresentException(型定義が未存在)
+- UnsupportedOperationException(サポートされていないような操作)
 
 ## エラー
 
 エラーは、ライブラリの非互換性、無限再帰、メモリリークなど、深刻で通常は回復不可能な状態を表します。
 
-また、RuntimeException を拡張していなくても、チェックされていません 。
+また、RuntimeException を拡張していなくても、チェックされていません。
 
 ほとんどの場合、エラーを処理、インスタンス化、または拡張するのは奇妙なこと です。通常、これらを完全に伝播させたいと思います。
 
-エラーの例としては、 StackOverflowError と OutOfMemoryError、NoClassDefFoundError などがあります。
+エラーの例としては、 StackOverflowError や OutOfMemoryError、NoClassDefFoundError などがあります。
+
+### Errorクラスの例
+
+- StackOverflowError(スタック領域のオーバーフロー)
+- OutOfMemoryError(メモリの不足)
+- InternalError(内部エラー)
+- ClassFormatError(クラスファイルの破損、解釈できない)
+- UnknownError(未知の重大なエラー)
