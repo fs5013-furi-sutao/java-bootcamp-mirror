@@ -20,6 +20,8 @@ const variant = ({ background, backgroundHover, on }) => () => {
 }
 
 const InnerButton = styled.buttonBox`
+  width: 16em;
+  height: 4em;
   appearance: none;
   border-radius: base;
   transition: base;
@@ -30,7 +32,7 @@ const InnerButton = styled.buttonBox`
   align-items: center;
   cursor: pointer;
   font-size: 16;
-  padding: 2 3;
+  padding: 3 5;
   text-decoration: none !important;
 
   &:disabled {
