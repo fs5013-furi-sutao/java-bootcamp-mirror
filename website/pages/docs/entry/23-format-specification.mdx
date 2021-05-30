@@ -18,9 +18,34 @@ order: 23
 
 ### 目的に合った書式を設定する方法を知る
 
-Java で書式指定する方法を Web で調べてください。検索キーワードは、「 [java 論理演算子](https://www.google.com/search?q=java+書式指定) 」です。3 種類ぐらい説明記事やサンプルコードを読んで、様々な書式指定をざっくり見ておきましょう。
+Java で書式指定する方法を Web で調べてください。検索キーワードは、「 [java 書式設定](https://www.google.com/search?q=java+書式指定) 」です。3 種類ぐらい説明記事やサンプルコードを読んで、様々な書式指定をざっくり見ておきましょう。
 
-手軽に使える書式設定には `System.out.printf()` や `String.format()` があるが、NumberFormat や DecimalFormat など、金額やパーセンテージのフォーマットに便利なクラスがあることも、ざっくり調べて知っておきましょう。
+手軽に使える書式設定には `System.out.format()` と `System.out.printf()` や `String.format()` があるが、NumberFormat や DecimalFormat など、金額やパーセンテージのフォーマットに便利なクラスがあることも、ざっくり調べて知っておきましょう。
+
+### ライブラリ（JDK）の処理を見てみる
+
+VSCode の Java 拡張には、ライブラリの実装を見ることができる機能も備わっています。
+
+Java のライブラリ（JDK）、例えば、java.util パッケージや java.lang パッケージなどは、コンパイルされた class ファイルです。
+
+class ファイルは、機械語なので、Java コードのように読めるソースコードではなく、人間が素直に読めない内容になっています。
+
+しかし、VSCode で開くと、自動でデコンパイル（逆コンパイル）をしてくれるため、class ファイルを Java のソースコードとして閲覧することができます。
+
+例えば、コーディングした `System.out.printf()` の `printf` の部分を、Ctrl キーを押しながらクリックすると、class ファイルが開かれ、`printf` メソッドの実装が見ることができます。
+
+この実装を見れば、分かる通り、`printf` メソッドは、内部で `format` メソッドに転送しているだけのメソッドであることが分かります。
+
+つまり、`printf` メソッドには、実体としての処理の実装はないのです。
+
+java.io.PrintStream.class:  
+``` java
+public PrintStream printf(String format, Object ... args) {
+    return format(format, args);
+}
+```
+
+### ショートサーキットについて
 
 また、短絡評価（ショートサーキット）とは何かも調べてください。検索キーワードは、「 [java ショートサーキット](https://www.google.com/search?q=java+ショートサーキット) 」です。
 
