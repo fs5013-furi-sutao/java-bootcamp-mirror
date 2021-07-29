@@ -76,10 +76,11 @@ Oracle のドキュメントには、メソッドの呼び出し元が回復で�
 
 ### 非チェック例外の例
 
-- NullPointerException(ぬるぽ)
+- NullPointerException(ヌルポ)
 - ArrayIndexOutOfBoundsException(配列で存在しない要素へのアクセス)
 - IllegalArgumentException(不正な引数をメソッドに渡した)
 - ArithmeticException(算術例外)
+- NumberFormatException(文字列が解析可能な数値を含まない場合の例外)
 - ClassCastException(継承関係のないクラスへのキャスト)
 - NegativeArraySizeException(負の値を配列のサイズに指定)
 - SecurityException(セキュリティ違反)
@@ -103,3 +104,134 @@ Oracle のドキュメントには、メソッドの呼び出し元が回復で�
 - InternalError(内部エラー)
 - ClassFormatError(クラスファイルの破損、解釈できない)
 - UnknownError(未知の重大なエラー)
+
+## 練習問題 1（時間: 20 分）
+
+実行結果になるように main メソッドに処理を書きなさい
+
+### CheckedExceptionDemo.java
+
+``` java
+package master.checked.excep;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class CheckedExceptionDemo {
+    private static final String MESSAGE_FORMAT_FOR_OCCURED_EXCEPTION = "%s が発生しました %n";
+    private static final String MESSAGE_FOR_EXTENDS_THROWABLE = "Throwable を継承しています";
+    private static final String MESSAGE_FOR_NOT_EXTENDS_THROWABLE = "Throwable を継承していません";
+
+    private static final String MESSAGE_FOR_UNCHECKED_EXCEPTION = "非チェック例外です";
+    private static final String MESSAGE_FOR_NOT_UNCHECKED_EXCEPTION = "非チェック例外ではありません";
+
+    private static final String PATH_FOR_READ_FILE = "./test.txt";
+
+    public static void main(String[] args) {
+
+        // ここに処理を書く
+
+    }
+
+    private static void showOccuredException(Exception e) {
+        System.out.format(MESSAGE_FORMAT_FOR_OCCURED_EXCEPTION,
+                e.getClass().getSimpleName());
+    }
+
+    private static void showIsExtendsThrowable(Exception e) {
+        if (e instanceof Throwable) {
+            System.out.println(MESSAGE_FOR_EXTENDS_THROWABLE);
+            return;
+        }
+        System.out.println(MESSAGE_FOR_NOT_EXTENDS_THROWABLE);
+    }
+
+    private static void showIsUncheckedException(Exception e) {
+        if (e instanceof RuntimeException) {
+            System.out.println(MESSAGE_FOR_UNCHECKED_EXCEPTION);
+            return;
+        }
+        show(MESSAGE_FOR_NOT_UNCHECKED_EXCEPTION);
+    }
+
+    private static void show(String message) {
+        System.out.println(message);
+    }
+}
+```
+### 実行結果
+
+``` console
+FileNotFoundException が発生しました 
+Throwable を継承しています
+非チェック例外ではありません
+```
+
+## 解答例
+
+https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/06.master/02.checked-exception-and-unchecked-exception/src/master/checked/excep/CheckedExceptionDemo.java
+
+## 練習問題 2（時間: 20 分）
+
+実行結果になるように main メソッドに処理を書きなさい
+
+### CheckedExceptionDemo.java
+
+``` java
+package master.unchecked.excep;
+
+public class UncheckedExceptionDemo {
+    private static final String MESSAGE_FORMAT_FOR_OCCURED_EXCEPTION = "%s が発生しました %n";
+    private static final String MESSAGE_FOR_EXTENDS_THROWABLE = "Throwable を継承しています";
+    private static final String MESSAGE_FOR_NOT_EXTENDS_THROWABLE = "Throwable を継承していません";
+
+    private static final String MESSAGE_FOR_UNCHECKED_EXCEPTION = "非チェック例外です";
+    private static final String MESSAGE_FOR_NOT_UNCHECKED_EXCEPTION = "非チェック例外ではありません";
+
+    private static final String TARGET_FOR_PARSE_TO_INT = "b";
+
+    public static void main(String[] args) {
+
+        // ここに処理を書く
+
+    }
+
+    private static void showOccuredException(Exception e) {
+        System.out.format(MESSAGE_FORMAT_FOR_OCCURED_EXCEPTION,
+                e.getClass().getSimpleName());
+    }
+
+    private static void showIsExtendsThrowable(Exception e) {
+        if (e instanceof Throwable) {
+            System.out.println(MESSAGE_FOR_EXTENDS_THROWABLE);
+            return;
+        }
+        System.out.println(MESSAGE_FOR_NOT_EXTENDS_THROWABLE);
+    }
+
+    private static void showIsUncheckedException(Exception e) {
+        if (e instanceof RuntimeException) {
+            System.out.println(MESSAGE_FOR_UNCHECKED_EXCEPTION);
+            return;
+        }
+        show(MESSAGE_FOR_NOT_UNCHECKED_EXCEPTION);
+    }
+
+    private static void show(String message) {
+        System.out.println(message);
+    }
+}
+```
+### 実行結果
+
+``` console
+NumberFormatException が発生しました 
+Throwable を継承しています
+非チェック例外です
+```
+
+## 解答例
+
+https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/06.master/02.checked-exception-and-unchecked-exception/src/master/unchecked/excep/UncheckedExceptionDemo.java
