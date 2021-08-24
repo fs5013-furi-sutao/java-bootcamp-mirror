@@ -90,8 +90,9 @@ callStart メソッドだけを変更すれば良いことになります。
 import java.util.Random;
 
 public class BattleField {
-    public static void main(String[] args) {
+    private static final int MAX_TURN_NO = 5;
 
+    public static void main(String[] args) {
         System.out.println("-----");
         System.out.println("処理をスタートします");
         System.out.println("-----");
@@ -99,7 +100,7 @@ public class BattleField {
         String[] players = { "山本", "浜田", };
 
         Random rand = new Random();
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= MAX_TURN_NO; i++) {
             int randomIndex = rand.nextInt(2);
             String attackerName = players[randomIndex];
 
