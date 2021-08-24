@@ -101,7 +101,7 @@ public class BattleField {
 
         Random rand = new Random();
         for (int i = 1; i <= MAX_TURN_NO; i++) {
-            int randomIndex = rand.nextInt(2);
+            int randomIndex = rand.nextInt(players.length);
             String attackerName = players[randomIndex];
 
             String defenderName
