@@ -24,7 +24,7 @@ List<String> lines = splitWithLineBreakCode(
     "１行目。¥n２行目。¥n３行目。¥n４行目。¥n¥n５行目¥n"
 );
 
-for (String line in lines) {
+for (String line : lines) {
     System.out.println(line);
 }
 ```
@@ -51,7 +51,7 @@ List<String> lines = splitWithLineBreakCodeAndPeriod(
     "１行目。２行目。¥n３行目。４行目。¥n¥n５行目。"
 );
 
-for (String line in lines) {
+for (String line : lines) {
     System.out.println(line);
 }
 ```
@@ -78,7 +78,7 @@ List<String> lines = splitFixedLengthWithLineBreakCodeAndPeriod(
     6
 );
 
-for (String line in lines) {
+for (String line : lines) {
     System.out.println(line);
 }
 ```
@@ -107,7 +107,7 @@ List<String> lines =
         8
     );
 
-for (String line in lines) {
+for (String line : lines) {
     System.out.println(line);
 }
 ```
