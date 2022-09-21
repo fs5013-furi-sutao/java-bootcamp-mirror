@@ -1,0 +1,66 @@
+---
+title: 09. 開発者に適した VSCode の導入方法
+section: 01.イントロ
+slug: /intro/09-how-to-install-vscode-by-scoop
+order: 9
+---
+
+# 09. 開発者に適した VSCode の導入方法
+
+Scoop を使って VSCode を導入する方法を説明する
+
+## Scoop でインストール
+
+Scoop に存在するか、どの Bucket にあるかを確認する。
+
+```console
+scoop search vscode
+```
+
+実行結果:
+
+```
+'extras' bucket:
+    vscode (1.69.2)
+```
+
+extras バケットにあるのが分かる。
+
+VSCode をインストールする。
+
+```console
+scoop install vscode
+```
+
+## 実行ファイルの場所
+
+```
+C:\Users\＜ユーザ名＞\scoop\apps\vscode\current\Code.exe
+```
+
+## ユーザデータの格納場所
+
+ユーザーデータの格納場所であるdataフォルダを、以下の場所に作る。
+
+```
+C:\Users\＜ユーザ名＞\scoop\apps\vscode\current\data
+```
+
+この data フォルダの中にユーザ設定や拡張機能がすべて保存される。そのため、他の VSCode を利用する際も、この data フォルダを実行する Code.exe の階層に置けば、同じ状態、同じ設定で VSCode を使用することができる。
+複数人で開発を行う際も、手軽に同じ状態のVSCodeを作り上げることができる。
+
+## Update
+
+VSCode を更新する。
+
+```console
+scoop update vscode
+```
+
+## アンインストール
+
+VSCode をアンインストールする。
+
+```console
+scoop uninstall vscode
+```
