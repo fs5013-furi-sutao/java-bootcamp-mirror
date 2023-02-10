@@ -30,5 +30,6 @@ module.exports = {
         trackingId: 'UA-154496255-5',
       },
     },
+    `gatsby-plugin-styled-components`
   ],
 }
