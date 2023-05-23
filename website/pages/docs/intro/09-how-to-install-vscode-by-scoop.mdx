@@ -9,24 +9,26 @@ order: 9
 
 Scoop を使って VSCode を導入する方法を説明する
 
-## Scoop でインストール
+## バケットの追加
 
-Scoop に存在するか、どの Bucket にあるかを確認する。
+VSCodeは `extras` バケットに存在している
+
+`extras` バケットを追加するには以下のコマンドを実行する
 
 ```console
-scoop search vscode
+scoop bucket add extras
 ```
 
 実行結果:
 
 ```
-'extras' bucket:
-    vscode (1.69.2)
+Checking repo... ok
+The extras bucket was added successfully.
 ```
 
-extras バケットにあるのが分かる。
+バケットの追加が成功した。
 
-VSCode をインストールする。
+## VSCode をインストールする。
 
 ```console
 scoop install vscode
