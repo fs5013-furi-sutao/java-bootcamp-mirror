@@ -275,32 +275,20 @@ calculateSalary() メソッドには独自の実装を提供する必要があ�
 ```java
 package advanced.abstracts.employee.entity;
 
-public abstract class Employee {
+public class Contractor extends Employee {
+ 
+    private int workingHours;
 
-    private String name;
-    private int paymentPerHour;
+    public Contractor(
+            String name, int paymentPerHour, int workingHours) {
 
-    protected Employee(String name, int paymentPerHour) {
-        this.name = name;
-        this.paymentPerHour = paymentPerHour;
+        super(name, paymentPerHour);
+        this.workingHours = workingHours;
     }
 
-    public abstract int calculateSalary();
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setPaymentPerHour(int paymentPerHour) {
-        this.paymentPerHour = paymentPerHour;
-    }
-
-    public int getPaymentPerHour() {
-        return paymentPerHour;
+    @Override
+    public int calculateSalary() {
+        return getPaymentPerHour() * workingHours;
     }
 }
 
