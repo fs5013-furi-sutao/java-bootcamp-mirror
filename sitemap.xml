@@ -9,8 +9,9 @@
 <url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/entry/06-naming-rules</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/entry/03-primitive-types</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/entrypg/11-write-select-statement</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/entry/05-cast</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/entrypg/15-how-to-join-tables</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/contact/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/entry/09-named-boolean-variables</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/entrypg/14-write-insert-statement</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/entry/07-vscode-auto-complete</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -161,10 +162,9 @@
 <url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/entrypg/04-how-to-make-test-case</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/entrypg/08-how-to-install-docker</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/entrypg/09-how-to-start-mysql-server</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/entrypg/15-how-to-join-tables</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/entrypg/07-what-is-mysql</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/contact/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/entrypg/05-test-coverage</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/intro/05-whats-scoop</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/intro/14-how-to-ask-good-questions</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://fs5013-furi-sutao.github.io/java-bootcamp/java-bootcamp/entrypg/06-how-to-test</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
