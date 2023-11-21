@@ -1,0 +1,56 @@
+---
+title: 09. MySQLサーバの起動方法
+section: 07.初級PG認定試験対策
+slug: /entrypg/09-how-to-start-mysql-server
+order: 9
+---
+
+# 09. MySQLサーバの起動方法
+MySQLサーバの起動方法を説明する
+
+## Docker Composeのインストール
+
+はじめに必要になるツールのインストールをします。ここでは簡単にサーバの準備ができるようにDocker Composeを使います。
+
+カリキュラムの「01.イントロ」で使用したScoopを使ってインストールします。
+
+インストールをするには次のコマンドをコマンドプロンプトで実行してください。
+
+```console
+scoop install docker-compose
+```
+
+## 必要なファイルのダウンロード
+
+今回はMySQLの学習がスムーズに行えるようにあらかじめ準備したMySQLサーバの設定やデータを使います。
+次のファイルをダウンロードして解凍してください。
+
+[ダウンロード](./learning-db.zip)
+
+解凍ができたら、フォルダを開きます。
+
+中には複数のフォルダやファイルが入っています。
+「docker-compose.yml」というファイルが見えていることを確認します。
+
+次に、エクスプローラー上の何も書かれていない部分で、「Shift」キーを押しながら右クリックをします。
+ポップアップメニューの「PowerShell ウィンドウをここで開く」をクリックします。
+
+開いたPowerShellで次のコマンドを実行します。
+
+```console
+docker-compose up -d
+```
+
+実行が終わったら、MySQLサーバの準備が終わりました。
+
+## MySQLサーバの起動方法
+
+上記の準備が終わるとDocker Desktopの左側の項目「Containers」に「learning-db」という項目が追加される。
+
+「Status」が「Running」になっている場合はMySQLサーバの起動ができています。
+
+そうでない場合は、「Actions」の「Start」ボタンをクリックします。
+
+![MySQLの起動方法](./boot-mysql-docker.png)
+
+※Docker Desktopを終了したり、パソコンを再起動すると「Start」ボタンを押さないとMySQLサーバが使えないことに注意してください。

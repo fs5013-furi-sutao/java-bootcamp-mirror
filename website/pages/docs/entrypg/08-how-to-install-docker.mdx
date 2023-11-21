@@ -1,0 +1,30 @@
+---
+title: 08. Dockerのインストール方法
+section: 07.初級PG認定試験対策
+slug: /entrypg/08-how-to-install-docker
+order: 8
+---
+
+# 08. Dockerのインストール方法
+Dockerのダウンロートとインストール方法を説明する
+
+## Docker Desktopのインストール
+
+まずはDocker Desktopのインスト－ラをダウンロードします。
+
+[Docker Desktopのダウンロート](https://www.docker.com/products/docker-desktop/) 
+
+ダウンロードが終わったら、インストーラを起動して、インストールを行います。
+
+## Docker Desktopの起動
+
+インストールが終わったら、起動をします。Docker Desktopの左下のクジラのアイコンの背景は「緑色」の場合は、起動が完了しています。
+背景が「オレンジ色」または「赤色」の場合は、起動ができていません。
+
+## 起動ができない場合
+
+「Docker Desktop - WSL kernel version too low」と表示される場合は次のコマンドをコマンドプロンプトで実行してください。
+
+```console
+wsl --update
+```

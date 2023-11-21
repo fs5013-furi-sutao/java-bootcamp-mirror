@@ -1,0 +1,104 @@
+---
+title: 15. テーブルの結合方法
+section: 07.初級PG認定試験対策
+slug: /entrypg/15-how-to-join-tables
+order: 15
+---
+
+# 15. テーブルの結合方法
+複数のテーブルを結合する方法を説明する
+
+## 基本的な書き方
+
+```sql
+SELECT カラム名1, カラム名2...
+FROM テーブル名1
+INNER JOIN テーブル名2
+ON 結合条件
+```
+
+### 1.事前準備
+
+まずは事前準備として次の4つのSQL分を順番に実行してください。
+
+```sql
+INSERT INTO offices (officeCode,postalCode,prefecture,city,addressLine1,addressLine2,phone,area)
+VALUES (2008,"000-8888","愛知県","名古屋市","中区錦1丁目","5-13","000-888-8888","東海");
+```
+
+```sql
+SET foreign_key_checks = 0;
+```
+
+```sql
+INSERT INTO employees (employeeNumber,firstName,lastName,firstNameKana,lastNameKana,age,email,officeCode,jobPosition)
+VALUES (1703,'鈴木','太郎','すずき','太郎',30,'sfa.asdf@classicmodels.co.jp','2009','営業担当');
+```
+
+```sql
+SET foreign_key_checks = 1;
+```
+
+実行が終わると`employees`と`offices`テーブルに1レコードずつ追加されています。
+
+### 2.INNER JOINの書き方
+
+`employees`テーブルには社員情報、`offices`テーブルには営業所情報が登録されています。
+
+どの社員がどの営業所に所属しているのかを確認するには`officeCode`をたどれば確認ができます。
+
+例えば`employeeNumber`が`1002`の従業員の`officeCode`は`2001`です。
+`offices`テーブルを確認すると`北海道`の営業所に所属していることが確認できます。
+
+このようにテーブル同士は特定のカラムの情報を使って、繋げることができます。この情報のことを外部キーといいます。
+
+次のSQL文はこの外部キーを使って`employees`テーブルと`offices`テーブルを結合し、両テーブルからデータを取得しています。
+
+```sql
+SELECT employeeNumber,firstName, lastName, prefecture
+FROM employees
+INNER JOIN offices
+ON employees.officeCode = offices.officeCode;
+```
+
+ここで注目したいのは「事前準備」で追加した`employees`と`offices`テーブルのレコードが結果に表示されていないことです。
+
+`employees`テーブルの`employeeNumber`が`1703`であるレコードの`officeCode`は`2009`です。`offices`テーブルには該当するレコードは存在しません。
+
+同じように`offices`テーブルの`officeCode`が`2008`であるレコードに対して、`employees`に該当するレコードが存在しません。
+
+このようにINNER JOINを使った場合、結合ができなかったレコードは反映されません。
+
+### 3.LEFT JOINの書き方
+
+LEFT JOINを使った場合は、基本的にINNER JOINと同じことができますが、結合できるレコードが存在しない場合の動作が異なります。
+
+結合できるレコードが存在しない場合は、先に記述したテーブルのレコードは結果に反映されます。
+ただし、`prefecture`のように後から記述したテーブルにしか存在しない情報は`NULL`となります。
+
+```sql
+SELECT employeeNumber,firstName, lastName, prefecture
+FROM employees
+LEFT JOIN offices
+ON employees.officeCode = offices.officeCode;
+```
+
+![LEFT-JOINの実行結果](./left-join-result.png)
+
+### 4.RIGHT JOINの書き方
+
+RIGHT JOINはLEFT JOINと同じことができます。
+
+結合できるレコードが存在しない場合は、後から記述したテーブルのレコードは結果に反映されます。
+ただし、`employeeNumber`、`firstName`、`lastName`のように先に記述したテーブルにしか存在しない情報は`NULL`となります。
+
+```sql
+SELECT employeeNumber,firstName, lastName, prefecture
+FROM employees
+RIGHT JOIN offices
+ON employees.officeCode = offices.officeCode;
+```
+
+![RIGHT-JOINの実行結果](./right-join-result.png)
+
+このように3種類の結合方法が存在しているため、用途によって使い分けることができます。

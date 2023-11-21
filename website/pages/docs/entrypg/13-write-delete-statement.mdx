@@ -1,0 +1,40 @@
+---
+title: 13. DELETE文の書き方
+section: 07.初級PG認定試験対策
+slug: /entrypg/13-write-delete-statement
+order: 13
+---
+
+# 13. DELETE文の書き方
+データベースのレコード削除する方法を説明する
+
+## 基本的な書き方
+
+テーブルの値を更新する場合は、DELETE文を使います。
+
+DELETE文はSELECT文・UPDATE文と同じようにWHERE句の指定は任意です。ただし、WHERE句を使わない場合は、テーブルの全レコードを削除してしまうため、注意が必要です。
+
+```sql
+DELETE FROM テーブル名
+WHERE カラム名 = 条件値;
+```
+
+WHERE句を使って1レコードだけを削除したい場合は、主キーを指定して削除を行います。
+主キー以外の情報を使ってレコードを削除する場合は複数のレコードが対象になる可能性があることを覚えておきましょう。
+
+### テーブルの値を一つ更新する
+`customers`テーブルの`customerNumber`（主キー）が`8103`であるレコードを削除する。
+
+```sql
+DELETE FROM orderdetails
+WHERE orderNumber = '40100'
+  AND productCode = 'S18_1749';
+```
+
+#### 削除前のテーブル
+![テーブル削除前](./before-delete-statement.png)
+
+#### 削除後のテーブル
+`orderdetails`テーブルの`orderNumber`が`40100`かつ、`productCode`が`S18_1749`であるレコードを削除したため、一番上のレコードが削除されたことの確認ができます。
+
+![テーブル削除後](./after-delete-statement.png)

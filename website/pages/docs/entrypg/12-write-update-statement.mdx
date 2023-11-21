@@ -1,0 +1,60 @@
+---
+title: 12. UPDATE文の書き方
+section: 07.初級PG認定試験対策
+slug: /entrypg/12-write-update-statement
+order: 12
+---
+
+# 12. UPDATE文の書き方
+データベースの値を更新する方法を説明する
+
+## 基本的な書き方
+
+テーブルの値を更新する場合は、UPDATE文を使います。
+
+UPDATE文はSELECT文と同じようにWHERE句の指定は任意です。ただし、WHERE句を使わない場合は、テーブルの全レコードを更新してしまうため、注意が必要です。
+
+```sql
+UPDATE テーブル名
+SET カラム名 = 値
+WHERE カラム名 = 条件値;
+```
+
+WHERE句を使って1レコードだけを更新したい場合は、主キーを指定して更新を行います。
+主キー以外の情報を使ってレコードを更新する場合は複数のレコードが対象になる可能性があることを覚えておきましょう。
+
+### 1.テーブルの値を一つ更新する
+`customers`テーブルの`customerNumber`（主キー）が`8103`であるレコードの`customerName`を`Atelier Graphic`に更新する。
+
+```sql
+UPDATE customers
+SET customerName = "Atelier Graphic"
+WHERE customerNumber = 8103;
+```
+
+#### 更新前のテーブル
+![テーブル更新前1](./before-update-statement-1.png)
+
+#### 更新後のテーブル
+UPDATE文を実行した場合は表示内容の更新をする必要があります。`データ更新`ボタンをクリックして更新します。
+ここで`customerName`が`アトリエ グラフィック`から`Atelier Graphic`に変わったことが確認できます。
+
+![テーブル更新後1](./after-update-statement-1.png)
+
+### 2.テーブルの値を複数更新する
+同時に複数のカラムを更新した場合は、SET句の後にコンマ区切りでカラム名と値を書けば
+
+```sql
+UPDATE customers
+SET customerName = "Signal Gift Store",
+    contactFirstName = "鈴木"
+WHERE customerNumber = 8112;
+```
+
+#### 更新前のテーブル
+![テーブル更新前2](./before-update-statement-2.png)
+
+#### 更新後のテーブル
+ここで`customerName`と`contactFirstName`が同時に変わったのが確認ができます。
+
+![テーブル更新後2](./after-update-statement-2.png)
