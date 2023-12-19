@@ -80,13 +80,13 @@ public class EatItem {
     private String causeOfDeath; // 死因
 
     public EatItem(
-          String name, int danger, int heelHP, String coroner
+          String itemName, int dangerLevel, int expectedHeelingHp, String causeOfDeath
         ) {
 
-        this.name = name;
-        this.danger = danger;
-        this.heelHP = heelHP;
-        this.coroner = coroner;
+        this.itemName = itemName;
+        this.dangerLevel = dangerLevel;
+        this.expectedHeelingHp = expectedHeelingHp;
+        this.causeOfDeath = causeOfDeath;
     }
 
     public String getItemName() {

@@ -16,6 +16,7 @@ order: 11
 同じの文字が続く場合、"文字+連続する文字数"に置き換え、
 文字数を短くして圧縮する StringsCompressor クラスを作成しなさい
 
+### 実行例 1
 ```java title=src/StringsCompressor.java（一部抜粋）
 String text = encode("AAAAABBBBBBBBBBCDDDDDDDDDEEFFFFFG");
 System.out.println(text);
@@ -25,10 +26,21 @@ System.out.println(text);
 A5B10CD9E2F5G
 ```
 
+### 実行例 2
+```java title=src/StringsCompressor.java（一部抜粋）
+String text = encode("AAAAABBBBBBBBBBCDDDDDDDDDEEFFFFFGG");
+System.out.println(text);
+```
+
+```txt title=StringsCompressor.javaの実行結果
+A5B10CD9E2F5G2
+```
+
 ## 課題 2. 文字列展開
 
 課題 1 で圧縮した文字列を展開する StringsExpander クラスを作成しなさい
 
+### 実行例 1
 ```java title=src/StringsExpander.java（一部抜粋）
 String text = decode("A5B10CD9E2F5G");
 System.out.println(text);
@@ -36,4 +48,14 @@ System.out.println(text);
 
 ```txt title=StringsExpander.javaの実行結果
 AAAAABBBBBBBBBBCDDDDDDDDDEEFFFFFG
+```
+
+### 実行例 2
+```java title=src/StringsExpander.java（一部抜粋）
+String text = decode("A5B10CD9E2F5G2");
+System.out.println(text);
+```
+
+```txt title=StringsExpander.javaの実行結果
+AAAAABBBBBBBBBBCDDDDDDDDDEEFFFFFGG
 ```
