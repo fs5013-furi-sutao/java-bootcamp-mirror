@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public",
-    "build": "gatsby build --prefix-paths",
-    "start": "gatsby develop",
+    "deploy": "set NODE_OPTIONS=--openssl-legacy-provider && gatsby build --prefix-paths && gh-pages -d public",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && gatsby build --prefix-paths",
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean"
   },
