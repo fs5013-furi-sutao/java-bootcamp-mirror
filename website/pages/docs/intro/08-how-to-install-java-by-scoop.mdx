@@ -15,7 +15,7 @@ Java をインストールする。
 
 ## 今回インストールしたいアプリとバージョン
 
-今回は Java のバージョン 11 をインストールする。
+今回は Java のバージョン 17 をインストールする。
 
 Java の中でも、今回は OpenJDK を利用する。
 
@@ -26,7 +26,7 @@ OpenJDK は、Java の仕様（Java SE）に基づいて、オープンソース
 Scoop でアプリのマニフェスト（対象アプリをインストールする手順書）のリポジトリ（マニフェストが置かれた場所）を探すには、以下のコマンドを実行する。
 
 ```console
-scoop search openjdk11
+scoop search openjdk17
 ```
 
 実行結果例:
@@ -36,7 +36,7 @@ Results from other known buckets...
 (add them using 'scoop bucket add <name>')
 
 'java' bucket:
-    bucket/openjdk11
+    bucket/openjdk17
 ```
 
 上記の場合、実行結果例を見ると、ローカルにマニフェストがなく、他のバケットにありますよ・・・と言っている。その他のバケットはと、`java` バケットであると。
@@ -79,22 +79,13 @@ The java bucket was added successfully.
 準備が整ったので、次のコマンドで Java をインストールする。
 
 ```console
-scoop install openjdk11
+scoop install openjdk17
 ```
 
 実行結果:
 
 ```
-Updating Scoop...
-Updating 'java' bucket...
-Updating 'main' bucket...
-Scoop was updated successfully!
-Installing 'openjdk11' (11.0.2-9) [64bit]
-Loading openjdk-11.0.2_windows-x64_bin.zip from cache
-Checking hash of openjdk-11.0.2_windows-x64_bin.zip ... ok.
-Extracting openjdk-11.0.2_windows-x64_bin.zip ... done.
-Linking ~\scoop\apps\openjdk11\current => ~\scoop\apps\openjdk11\11.0.2-9
-'openjdk11' (11.0.2-9) was installed successfully!
+'openjdk17' (17.0.2-8) was installed successfully!
 ```
 
 Java のインストールが完了した。
@@ -110,9 +101,9 @@ java --version
 実行結果:
 
 ```
-openjdk 11.0.2 2019-01-15
-OpenJDK Runtime Environment 18.9 (build 11.0.2+9)
-OpenJDK 64-Bit Server VM 18.9 (build 11.0.2+9, mixed mode)
+openjdk 17.0.2 2022-01-18
+OpenJDK Runtime Environment (build 17.0.2+8-86)
+OpenJDK 64-Bit Server VM (build 17.0.2+8-86, mixed mode)
 ```
 
 

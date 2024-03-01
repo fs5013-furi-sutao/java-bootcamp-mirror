@@ -18,40 +18,28 @@ order: 23
 
 ### 目的に合った書式を設定する方法を知る
 
-Java で書式指定する方法を Web で調べてください。検索キーワードは、「 [java 書式設定](https://www.google.com/search?q=java+書式指定) 」です。3 種類ぐらい説明記事やサンプルコードを読んで、様々な書式指定をざっくり見ておきましょう。
+Java で書式指定する方法を Web で調べてください。検索キーワードは、
+「 [java 書式設定](https://www.google.com/search?q=java+書式指定) 」です。
+3 種類ぐらい説明記事やサンプルコードを読んで、様々な書式指定をざっくり見ておきましょう。
 
-手軽に使える書式設定には `System.out.format()` と `System.out.printf()` や `String.format()` があるが、NumberFormat や DecimalFormat など、金額やパーセンテージのフォーマットに便利なクラスがあることも、ざっくり調べて知っておきましょう。
+手軽に使える書式設定には `System.out.format()` と `System.out.printf()` や `String.format()` があるが、
+NumberFormat や DecimalFormat など、金額やパーセンテージのフォーマットに便利なクラスがあることも、ざっくり調べて知っておきましょう。
 
-### ライブラリ（JDK）の処理を見てみる
+## String.formatメソッドの使い方
 
-VSCode の Java 拡張には、ライブラリの実装を見ることができる機能も備わっています。
+以下は文字列「山本一郎」をメッセージに組み込み表示するプログラムです。
 
-Java のライブラリ（JDK）、例えば、java.util パッケージや java.lang パッケージなどは、コンパイルされた class ファイルです。
+```java
+public class NamePrintMessageBuilder {
+    public static void main(String[] args) {
 
-class ファイルは、機械語なので、Java コードのように読めるソースコードではなく、人間が素直に読めない内容になっています。
+        String name = "山本一郎";
+        String message = String.format("ぼくの名前は %s です.", name);
 
-しかし、VSCode で開くと、自動でデコンパイル（逆コンパイル）をしてくれるため、class ファイルを Java のソースコードとして閲覧することができます。
-
-例えば、コーディングした `System.out.printf()` の `printf` の部分を、Ctrl キーを押しながらクリックすると、class ファイルが開かれ、`printf` メソッドの実装が見ることができます。
-
-この実装を見れば、分かる通り、`printf` メソッドは、内部で `format` メソッドに転送しているだけのメソッドであることが分かります。
-
-つまり、`printf` メソッドには、実体としての処理の実装はないのです。
-
-java.io.PrintStream.class:  
-``` java
-public PrintStream printf(String format, Object ... args) {
-    return format(format, args);
+        System.out.println(message);
+    }
 }
 ```
-
-### ショートサーキットについて
-
-また、短絡評価（ショートサーキット）とは何かも調べてください。検索キーワードは、「 [java ショートサーキット](https://www.google.com/search?q=java+ショートサーキット) 」です。
-
-## 練習問題 01: 文字列変数をメッセージに組み込む（時間: 20 分）
-
-文字列「山本一郎」をメッセージに組み込み、そのメッセージを表示させる処理を main メソッドに持つ NamePrintMessageBuilder クラスを作成しなさい
 
 ### NamePrintMessageBuilder の実行結果
 
@@ -59,13 +47,22 @@ public PrintStream printf(String format, Object ... args) {
 ぼくの名前は 山本一郎 です.
 ```
 
-## 解答例
+## 練習問題 01: 数値変数と文字列変数をメッセージに組み込む（時間: 20 分）
 
-https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/23.format-specification/src/NamePrintMessageBuilder.java
+変数「weight」と変数「unit」の値をメッセージに組み込み、そのメッセージを表示できるように「?」部分にプログラムを追加しなさい
 
-## 練習問題 02: 数値変数と文字列変数をメッセージに組み込む（時間: 20 分）
+```java
+public class WeightPrintMessageBuilder {
+    public static void main(String[] args) {
 
-数値変数「7777」と文字列「キロ」をメッセージに組み込み、そのメッセージを表示させる処理を main メソッドに持つ WeightPrintMessageBuilder クラスを作成しなさい
+        int weight = 7777;
+        String unit = "キロ";
+        String message = ?;
+
+        System.out.println(message);
+    }
+}
+```
 
 ### WeightPrintMessageBuilder の実行結果
 
@@ -77,9 +74,19 @@ https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/23
 
 https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/23.format-specification/src/WeightPrintMessageBuilder.java
 
-## 練習問題 03: 数字を桁数分ゼロ埋めして表示（時間: 20 分）
+## 練習問題 02: 数字を桁数分ゼロ埋めして表示（時間: 20 分）
 
-数値変数「50」を 8 桁分ゼロ埋めして表示する処理を main メソッドに持つ ZeroPaddingFormatter クラスを作成しなさい
+数値変数「50」を 8 桁分ゼロ埋めして表示する処理を「?」部分に追加しなさい。
+
+```java
+public class ZeroPaddingFormatter {
+    public static void main(String[] args) {
+
+        int value = 50;
+        System.out.printf(?);
+    }
+}
+```
 
 ### ZeroPaddingFormatter の実行結果
 
@@ -91,9 +98,23 @@ https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/23
 
 https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/23.format-specification/src/ZeroPaddingFormatter.java
 
-## 練習問題 04: 金額表示（時間: 20 分）
+## 練習問題 03: 金額表示（時間: 20 分）
 
-123456789 円のノートの値段を「￥ 123,456,789」と表示する処理を main メソッドに持つ YenFormatter クラスを作成しなさい
+123456789 円のノートの値段を「￥ 123,456,789」と表示する処理を「?」部分に追加しなさい。
+
+```java
+import java.text.NumberFormat;
+
+public class YenFormatter {
+    public static void main(String[] args) {
+
+        int noteBookPrice = 123456789;
+
+        NumberFormat yenFormat = NumberFormat.getCurrencyInstance();
+        System.out.println(?);
+    }
+}
+```
 
 ### YenFormatter の実行結果
 
@@ -105,9 +126,23 @@ https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/23
 
 https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/23.format-specification/src/YenFormatter.java
 
-## 練習問題 05: パーセント表示（時間: 20 分）
+## 練習問題 04: パーセント表示（時間: 20 分）
 
-年率 123456.78935465 の会社成長率を「12,345,678.94%」と表示する処理を main メソッドに持つ PercentFormatter クラスを作成しなさい
+年率 123456.78935465 の会社成長率を「12,345,678.94%」と表示する処理を「?」部分に追加しなさい。
+
+```java
+import java.text.DecimalFormat;
+
+public class PercentFormatter {
+    public static void main(String[] args) {
+
+        Double companyGrowRatePerYear = 123456.78935465;
+
+        DecimalFormat percentFormat = new DecimalFormat(?);
+        System.out.println(percentFormat.format(companyGrowRatePerYear));
+    }
+}
+```
 
 ### PercentFormatter の実行結果
 

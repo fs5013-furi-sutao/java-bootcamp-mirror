@@ -16,11 +16,78 @@ order: 20
 
 ### 算術演算子の表し方を知る
 
-Java で論理演算子（|, &）を使う方法を Web で調べてください。検索キーワードは、「 [java 論理演算子](https://www.google.com/search?q=java+論理演算子) 」です。
+Java で論理演算子（ | , & ）を使う方法を Web で調べてください。検索キーワードは、「 [java 論理演算子](https://www.google.com/search?q=java+論理演算子) 」です。
 
-また、短絡評価（ショートサーキット）とは何かも調べてください。検索キーワードは、「 [java ショートサーキット](https://www.google.com/search?q=java+ショートサーキット) 」です。
+## で論理演算子（ | , & ） の使い方
 
-## 練習問題（時間: 20 分）
+以下は来店時間を入力すると、お店が営業時間中か営業時間外かを表示するプログラムです。
+
+```java
+import java.util.Scanner;
+
+public class WithoutLogicalOperator {
+    public static void main(String[] main) {
+        Scanner stdin = new Scanner(System.in);
+        
+        int openTime = 10;
+        int closeTime = 18;
+
+        System.out.print("来店時間を入力：");
+        int visitTime = stdin.nextInt();
+
+        if(visitTime >= openTime){
+            if(visitTime <= closeTime){
+                System.out.println("営業時間中です.");
+            }
+        }
+
+        if(visitTime < openTime){
+            System.out.println("営業時間外です.");
+        }
+
+        if(visitTime > closeTime){
+            System.out.println("営業時間外です.");
+        }
+        stdin.close();
+    }
+}
+```
+
+`営業時間中です.`というメッセージは記述した2つの条件のどちらにも当てはまる場合に表示し、`営業時間外です.`のメッセージは記述した2つの条件のどちらかに当てはまる場合に表示しています。
+
+このプログラムを論理演算子を使って書き換えると次のようになります。
+
+```java
+import java.util.Scanner;
+
+public class WithLogicalOperator {
+    public static void main(String[] main) {
+        Scanner stdin = new Scanner(System.in);
+        
+        int openTime = 10;
+        int closeTime = 18;
+
+        System.out.print("来店時間を入力：");
+        int visitTime = stdin.nextInt();
+
+        if(visitTime >= openTime && visitTime <= closeTime){
+            System.out.println("営業時間中です.");
+        }
+
+        if(visitTime < openTime || visitTime > closeTime){
+            System.out.println("営業時間外です.");
+        }
+        stdin.close();
+    }
+}
+
+```
+
+このように論理演算子を使うことでプログラムが書きやすくなります。
+
+次に、短絡評価（ショートサーキット）についても調べてください。検索キーワードは、「 [java ショートサーキット](https://www.google.com/search?q=java+ショートサーキット) 」です。
+
+## 練習問題 01:（時間: 20 分）
 
 以下のクラス ShortCircuit について、2 つの if 文、それぞれの上部に書かれたコメントの挙動となるように、条件式中の「?」を論理演算子に置き換えなさい
 

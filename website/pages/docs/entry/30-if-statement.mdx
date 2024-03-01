@@ -13,34 +13,191 @@ order: 30
 
 ### Java の if 文を知る
 
+
+
 プログラミングにおける if 文とは何か、Java で if 文を使って処理を条件分岐させる方法を Web で調べてください。検索キーワードは、「 [java if](https://www.google.com/search?q=java+if) 」です。3 種類ぐらい説明記事やサンプルコードを読んで、if 文とは何かを知り、if 文の使い方をつかみましょう。
 
-## 練習問題: うるう年判定（時間: 20 分）
+## ifの使い方
 
-main メソッドに、次の 5 つの年がうるう年かどうかを判定する処理を記述して、プログラム実行結果が以下に示したようになるように LeapYearChecker クラスを作成しなさい
+以下は配列に格納されている値を順番に確認し、その値が 10 より大きい場合は「〇〇 は 10 より大きい」と表示するプログラムです。
 
-うるう年が何か分からない場合は、検索ワード「 [うるう年とは](https://www.google.com/search?q=うるう年とは) 」で調べましょう。
+この場合、`if()` の中に記述した条件式 `numbers[i] > 10` の判定結果が `true` の場合は `{ }` 内の処理が実行されます。
 
-うるう年の判定方法が分からない場合は、検索ワード「 [うるう年 計算 方法](https://www.google.com/search?q=うるう年+計算+方法) 」で調べましょう。
+```java
+int[] numbers = {10, 50, 5, 9, 15};
 
-### 判定したい年
+for(int i = 0;i < numbers.length;i++) {
+    if(numbers[i] > 10) {
+        System.out.printf("%2d は 10 より大きい \n", numbers[i]);
+    }
+}
+```
 
-- 紀元前 45 年
-- 西暦 356 年
-- 西暦 1700 年
-- 西暦 2300 年
-- 西暦 2596 年
-
-### LeapYearChecker の実行結果
+### 実行結果
 
 ```
-西暦  -45 年は、うるう年ではありません.
-西暦  356 年は、うるう年です.
-西暦 1700 年は、うるう年ではありません.
-西暦 2300 年は、うるう年ではありません.
-西暦 2596 年は、うるう年です.
+50 は 10 より大きい 
+15 は 10 より大きい
+```
+
+## if-elseの使い方
+
+以下は配列に格納されている値を順番に確認し、その値が 10 より大きい場合は「〇〇 は 10 より大きい」と表示し、そうでない場合は「〇〇 は 10 より大きくない」と表示するプログラムです。
+
+ここでは前述のプログラムに、`else` が追加されています。
+`else` 後の `{ }` の中に記述した処理は条件式 `numbers[i] > 10` の判定が `false` のときに実行されます。
+
+if-elseを使うことで条件式に「当てはまる」場合と「当てはまらない」場合の処理を記述することができます。
+
+```java
+int[] numbers = {10, 50, 5, 9, 15};
+
+for(int i = 0;i < numbers.length;i++) {
+    if(numbers[i] > 10) {
+        System.out.printf("%2d は 10 より大きい \n", numbers[i]);
+    } else {
+        System.out.printf("%2d は 10 より大きくない \n", numbers[i]);
+    }
+}
+```
+
+### 実行結果
+
+```
+10 は 10 より大きくない 
+50 は 10 より大きい
+ 5 は 10 より大きくない
+ 9 は 10 より大きくない
+15 は 10 より大きい
+```
+
+## if-else ifの使い方
+
+次にelse ifの使い方を確認しましょう。直前のプログラムの `else` が `else if(numbers[i] < 10)` に変わっています。
+この場合、ifで記述した条件式に当てはまらなかったときelse ifの条件式を確認し、当てはまる場合は `{ }` の中に記述した処理を実行します。else ifを使うことで、1 つ目の条件式に当てはまらなかった場合、次の条件式を確認することができます。
+
+```java
+int[] numbers = {10, 50, 5, 9, 15};
+
+for(int i = 0;i < numbers.length;i++) {
+    if(numbers[i] > 10) {
+        System.out.printf("%2d は 10 より大きい \n", numbers[i]);
+    } else if(numbers[i] < 10) {
+        System.out.printf("%2d は 10 より小さい \n", numbers[i]);
+    }
+}
+```
+
+### 実行結果
+
+```
+50 は 10 より大きい 
+ 5 は 10 より小さい
+ 9 は 10 より小さい
+15 は 10 より大きい
+```
+
+### else if を複数個繋げる
+else ifは次のように複数記述することもできます。
+ただし、else ifを繋げ過ぎてしまうとプログラムが読みにくくなってしまうため、注意が必要です。
+
+```java
+int[] numbers = {10, 50, 5, 9, 15};
+
+for(int i = 0;i < numbers.length;i++) {
+    if(numbers[i] > 10) {
+        System.out.printf("%2d は 10 より大きい \n", numbers[i]);
+    } else if(numbers[i] < 10) {
+        System.out.printf("%2d は 10 より小さい \n", numbers[i]);
+    } else if(numbers[i] == 10){
+        System.out.printf("%2d は 10 と同じ \n", numbers[i]);
+    }
+}
+```
+
+### 実行結果
+
+```
+10 は 10 と同じ 
+50 は 10 より大きい
+ 5 は 10 より小さい
+ 9 は 10 より小さい
+15 は 10 より大きい
+```
+
+### 不要な比較を避ける
+
+直前のプログラムでは条件式を 3 つ記述しました。しかし、一番最後の条件式は不要です。
+
+2 つの数値を比較する場合、3 つのパターンしか存在しません。
+
+それぞれの数値を a, b とした場合、
+1. a は b よりも大きい
+2. a は b よりも小さい
+3. a と b が同じ
+
+このような場合、1と2のパターンに該当しないければ、必ず3のパターンに該当します。
+この考え方を適用するとプログラムを次のように書き換えることができます。
+
+```java
+int[] numbers = {10, 50, 5, 9, 15};
+
+for(int i = 0;i < numbers.length;i++){
+    if(numbers[i] > 10){
+        System.out.printf("%2d は 10 より大きい \n", numbers[i]);
+    }else if(numbers[i] < 10){
+        System.out.printf("%2d は 10 より小さい \n", numbers[i]);
+    }else{
+        System.out.printf("%2d は 10 と同じ \n", numbers[i]);
+    }
+}
+```
+
+
+## 練習問題 01: FizzBuzzを作ろう（時間: 20 分）
+
+プログラミング学習の登竜門の 1 つである「FizzBuzz」を作成しなさい
+
+### ルール
+
+- 0 から 15 までの整数を出力する
+- 3 で割り切れる整数の場合は、数字の代わりに「Fizz」と出力する
+- 5 で割り切れる整数の場合は、数字の代わりに「Buzz」と出力する
+- 3 と 5 の両方で割り切れる整数の場合は、数字の代わりに「FizzBuzz」と出力する
+
+### サンプルコード
+
+```java
+public class FizzBuzzPrinter {
+    public static void main(String[] args){
+
+        for(int i = 1;i <= 15;i++) {
+            System.out.println(i);
+        }
+    }
+}
+```
+
+### FizzBuzzPrinter の実行結果
+
+```
+1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
 ```
 
 ## 解答例
 
-https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/30.if-statement/src/LeapYearChecker.java
+https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/30-if-statement/src/FizzBuzzPrinter.java

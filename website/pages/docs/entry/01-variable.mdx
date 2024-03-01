@@ -14,23 +14,121 @@ order: 1
 変数とは何かを Web で調べてください。検索キーワードは、「 [java 変数](https://www.google.com/search?q=java+変数) 」です。
 3 種類ぐらい説明記事やサンプルコードを読んで、変数とは何かをつかみましょう。
 
+## 変数の使い方
+
+変数の概念を説明する際には、「箱」に例えることが多いです。ここでは変数の使い方を確認していきます。
+
+変数を使う場合はまず初めに変数を作る必要があります。変数を作ることを「宣言」といいます。
+
+変数の宣言ができたら値を入れます。変数に値を入れることを「代入」といいます。
+
+そして、変数に入れた値を使うことを「参照」と言います。
+
+続いて宣言、代入、参照のそれぞれのやり方を確認しましょう。
+
+### 変数の宣言
+
+変数を宣言する場合は、変数にどのような種類の値を入れるかを記述する必要がある。
+
+整数を入れたい場合は`int`型、文字列を入れたい場合は`String`型というように記述します。この種類のことを「データ型」と呼びます。
+
+下の例でint型の変数`number`とString型の変数`word`を宣言している。
+
+```java
+public class Variable {
+    public static void main(String[] args) {
+        int number;
+        String word;
+    }
+}
+```
+
+この例では`number`と`word`は変数を識別ために付ける名前（変数名）です。変数名はプログラムの作成者が決めることができます。
+
+### 変数に値を代入
+
+下の例ではそれぞれの変数に値を代入しています。
+
+```java
+public class Variable {
+    public static void main(String[] args) {
+        int number;
+        String word;
+
+        number = 15;
+        word = "Hello";
+    }
+}
+```
+ここで注意が必要なのは「文字列」を扱う場合にダブルクォートで囲む必要があることです。
+文字列にダブルクォートを付けることでプログラムである部分とそうでない部分の区別を付けています。
+
+### 変数の値を出力
+
+下の例はそれぞれの変数の値を画面に出力をしています。
+
+出力には出力メソッドを使います。Javaでは主にprint、println、printfメソッドを使います。
+それぞれの違いや使い方をWebで調べてください。検索キーワードは、「 [java 出力メソッド](https://www.google.com/search?q=java+出力メソッド) 」です。
+
+```java
+public class Variable {
+    public static void main(String[] args) {
+        int number;
+        String word;
+
+        number = 15;
+        word = "Hello";
+
+        System.out.println(number);
+        System.out.println(word);
+    }
+}
+```
+
+### プログラム実行結果
+
+```
+15
+Hello
+```
+
+### 変数の初期化
+
+変数を宣言する時点で既に代入したい値が決まっている場合は、「宣言」と「代入」を同時に行うことができます。このことを「初期化」と言います。
+
+下の例は初期化を使ってプログラムを書き換えたものです。
+
+```java
+public class Variable {
+    public static void main(String[] args) {
+        int number = 15;
+        String word = "Hello";
+
+        System.out.println(number);
+        System.out.println(word);
+    }
+}
+```
+
 ## 練習問題（時間: 20 分）
 
 main メソッドに以下の 2 つの処理を記述して、プログラム実行結果が以下に示したようになるようにプログラムを作成しなさい。
 
 ### 1. 変数宣言、変数への代入処理:
 
-- 変数「父親の年齢」に 42 を代入
-- 変数「母の年齢」に 38 を代入
-- 変数「ぼくの年齢」に 20 を代入
-- 変数「ぼくの体重（kg）」に 670 を代入
+- int型の変数「fatherAge」を宣言
+- 変数「fatherAge」に 42 を代入
+- int型の変数「motherAge」を宣言
+- 変数「motherAge」に 38 を代入
+- int型の変数「myAge」を 20 で初期化
+- int型の変数「myWeightKg」を 670 で初期化
 
 ### 2. 変数に代入した数値の表示処理:
 
-- 「父親の年齢」を表示
-- 「母の年齢」を表示
-- 「ぼくの年齢」を表示
-- 「ぼくの体重（kg）」を表示
+- 「fatherAge」を表示
+- 「motherAge」を表示
+- 「myAge」を表示
+- 「myWeightKg」を表示
 
 ### プログラム実行結果
 
@@ -38,10 +136,9 @@ main メソッドに以下の 2 つの処理を記述して、プログラム実
 ぼくのパパの年齢は 42 歳です.
 ぼくのママの年齢は 38 歳です.
 ぼくの年齢は 20 歳です.
-
 ぼくの体重は 670Kg です.
 ```
 
 ## 解答例
 
-https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/01.variables/src/Variables.java
+https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/01.variables/src/ShowFamilyInfo.java

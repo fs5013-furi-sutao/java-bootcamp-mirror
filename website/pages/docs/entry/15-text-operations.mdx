@@ -18,13 +18,24 @@ order: 15
 
 Java ではどんな文字列操作が可能なのか、どうやって文字列を操作するのか、Web でざっくり調べてください。検索キーワードは、「 [java 文字列 操作](https://www.google.com/search?q=java+文字列+操作) 」です。3 種類ぐらい説明記事やサンプルコードを読んで、Java における文字列操作の概要を調べてみましょう。
 
-## 練習問題 01: 文字列の分割（時間: 20 分）
+## 文字列の分割
 
-main メソッドに以下の 3 つの処理を記述して、プログラム実行結果が以下に示したようになるように StringSplitter クラスを作成しなさい
+splitメソッドを使うと文字列を分割することができます。この例では半角スペースで文字列を分割しています。
 
-- 変数「フルネーム」で「山本 一郎」を宣言する
-- 変数「フルネーム」で 文字列を分割するメソッドを、半角スペースを引数にして呼び出し、分割結果を変数「名前配列」に代入する
-- 変数「名前配列」を使って、姓と名を表示する
+- 変数 「fullName」 を「山本 一郎」で初期化
+- 変数 「fullName」 に 文字列を分割するメソッドを使用。半角スペースを引数にして呼び出し、分割結果を配列「names」に代入
+- 配列「names」を使って、姓と名を表示
+
+```java
+public class StringSplitter {
+    public static void main(String[] args) {
+
+        String fullName = "山本 一郎";
+        String[] names = fullName.split(" ");
+        System.out.printf("姓: %s, 名: %s %n", names[0], names[1]);
+    }
+}
+```
 
 ### StringSplitter の実行結果
 
@@ -32,16 +43,12 @@ main メソッドに以下の 3 つの処理を記述して、プログラム実
 姓: 山本, 名: 一郎
 ```
 
-## StringSplitter の解答例
-
-https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/15.text-operations/src/StringSplitter.java
-
-## 練習問題 02: 文字列の結合（時間: 20 分）
+## 練習問題 01: 文字列の結合（時間: 20 分）
 
 main メソッドに以下の 4 つの処理を記述して、プログラム実行結果が以下に示したようになるように StringConcatter クラスを作成しなさい
 
-- 変数「姓」で「山本」を宣言する
-- 変数「名」で「一郎」を宣言する
+- 変数「姓」を「山本」で初期化
+- 変数「名」を「一郎」で初期化
 - 変数「姓」で文字列を結合するメソッドを、変数「名」を引数にして呼び出し、結合結果を変数「フルネーム」に代入する
 - 変数「フルネーム」を表示する
 
@@ -55,7 +62,7 @@ main メソッドに以下の 4 つの処理を記述して、プログラム実
 
 https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/15.text-operations/src/StringConcatter.java
 
-## 練習問題 03: 複数文字列の結合（時間: 20 分）
+## 練習問題 02: 複数文字列の結合（時間: 20 分）
 
 main メソッドに以下の 4 つの処理を記述して、プログラム実行結果が以下に示したようになるように MultipleStringsConcatter クラスを作成しなさい
 
@@ -65,9 +72,9 @@ main メソッドに以下の 4 つの処理を記述して、プログラム実
 
 ### 2. 変数宣言
 
-- StringBuilder クラスのインスタンスを生成して、StringBuilder 型の変数「文字列組立」に代入する
-- 変数「姓」で「山本」を宣言する
-- 変数「名」で「一郎」を宣言する
+- StringBuilder クラスのインスタンスを生成して、StringBuilder 型の変数「文字列組立」に代入
+- 変数「姓」を「山本」で初期化
+- 変数「名」を「一郎」で初期化
 
 ### 3. 文字列結合
 
@@ -89,18 +96,18 @@ main メソッドに以下の 4 つの処理を記述して、プログラム実
 
 https://github.com/fs5013-furi-sutao/java-bootcamp-answers/blob/main/02.entry/15.text-operations/src/MultipleStringsConcatter.java
 
-## 練習問題 04: 文字列の切り出し（時間: 20 分）
+## 練習問題 03: 文字列の切り出し（時間: 20 分）
 
 main メソッドに以下の 4 つの処理を記述して、プログラム実行結果が以下に示したようになるように StringCutOut クラスを作成しなさい
 
 ### 1. 定数宣言
 
-- 定数「始点」として「2」を宣言する
-- 定数「終点」として「6」を宣言する
+- 定数「始点」を「2」で初期化
+- 定数「終点」を「6」で初期化
 
 ### 2. 変数宣言
 
-- 変数「対象文字列」で「investment」を宣言する
+- 変数「対象文字列」を「investment」で初期化
 
 ### 3. 文字列の切り出し
 
