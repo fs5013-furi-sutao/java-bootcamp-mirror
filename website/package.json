@@ -3,23 +3,21 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "deploy": "set NODE_OPTIONS=--openssl-legacy-provider && gatsby build --prefix-paths && gh-pages -d public",
-    "build": "set NODE_OPTIONS=--openssl-legacy-provider && gatsby build --prefix-paths",
-    "start": "set NODE_OPTIONS=--openssl-legacy-provider && gatsby develop",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public",
+    "build": "gatsby build --prefix-paths",
+    "start": "gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "@xstyled/styled-components": "^1.15.0",
-    "babel-plugin-styled-components": "^2.0.7",
-    "gatsby": "^2.15.18",
-    "gatsby-plugin-google-analytics": "^2.3.13",
-    "gatsby-plugin-styled-components": "^5.25.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "@xstyled/styled-components": "^3.5.1",
+    "gatsby": "^4.6.0",
+    "gatsby-plugin-google-analytics": "^4.6.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-    "react-icons": "^3.11.0",
-    "smooth-doc": "^5.0.0"
+    "react-icons": "^4.3.1",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "gh-pages": "^5.0.0"
