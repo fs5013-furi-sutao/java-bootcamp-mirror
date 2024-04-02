@@ -2,7 +2,14 @@ import styled, { css, up, down } from '@xstyled/styled-components'
 
 export const Article = styled.article`
   .anchor {
-    fill: on-background;
+    margin-left: calc(-1em - 4px);
+    > svg {
+      fill: on-background;
+      width: 1em;
+      height: 1em;
+      display: inline;
+      vertical-align: -15%;
+    }
   }
 
   code {
@@ -28,7 +35,7 @@ export const Article = styled.article`
     font-size: 18;
     font-weight: 300;
     color: on-background-light;
-    /*margin: 2 0 !important;*/
+    margin: 2 0 !important;
 
     ${up(
       'xl',
@@ -259,7 +266,7 @@ export const Article = styled.article`
     background: #fdf7e5;
     line-height: 1.4;
     padding: 1em 1em;
-    margin: 4em 0 2em;
+    margin: 4em 0 2em !important;
     border-radius: 0 5px 5px 5px;
   }
 

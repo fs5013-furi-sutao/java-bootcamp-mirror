@@ -1,23 +1,25 @@
 import * as React from 'react'
-import { Button as ReakitButton } from 'reakit/Button'
+import { Button as AriakitButton } from 'ariakit/button'
 import styled, { css } from '@xstyled/styled-components'
 
-const variant = ({ background, backgroundHover, on }) => () => {
-  return css`
-    background-color: ${background};
-    color: ${on};
-
-    &:hover:not(:disabled) {
-      background-color: ${backgroundHover};
+const variant =
+  ({ background, backgroundHover, on }) =>
+  () => {
+    return css`
+      background-color: ${background};
       color: ${on};
-    }
 
-    &:active:not(:disabled) {
-      background-color: ${backgroundHover};
-      color: ${on};
-    }
-  `
-}
+      &:hover:not(:disabled) {
+        background-color: ${backgroundHover};
+        color: ${on};
+      }
+
+      &:active:not(:disabled) {
+        background-color: ${backgroundHover};
+        color: ${on};
+      }
+    `
+  }
 
 const InnerButton = styled.buttonBox`
   width: 16em;
@@ -25,7 +27,6 @@ const InnerButton = styled.buttonBox`
   appearance: none;
   border-radius: base;
   transition: base;
-  color: dusk-dark;
   font-weight: 500;
   border: 0;
   display: inline-flex;
@@ -66,22 +67,23 @@ const InnerButton = styled.buttonBox`
 
   &[data-variant='neutral'] {
     ${variant({
-      background: 'grey-300',
-      backgroundHover: 'grey-400',
+      background: 'gray-300',
+      backgroundHover: 'gray-400',
       on: 'black',
     })}
   }
 `
 
 export const Button = React.forwardRef(
-  ({ variant = 'primary', ...props }, ref) => {
+  ({ variant = 'primary', children, ...props }, ref) => {
     return (
-      <ReakitButton
-        ref={ref}
-        as={InnerButton}
-        data-variant={variant}
-        {...props}
-      />
+      <AriakitButton ref={ref} data-variant={variant}>
+        {(buttonProps) => (
+          <InnerButton {...buttonProps} {...props}>
+            {children}
+          </InnerButton>
+        )}
+      </AriakitButton>
     )
   },
 )

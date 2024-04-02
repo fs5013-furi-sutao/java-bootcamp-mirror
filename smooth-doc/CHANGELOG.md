@@ -2,6 +2,124 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.1.0](https://github.com/gregberge/smooth-doc/compare/v10.0.0...v10.1.0) (2022-10-05)
+
+
+### Features
+
+* add remark-gfm support ([34d99e4](https://github.com/gregberge/smooth-doc/commit/34d99e4f8ad5286cb43e1fc1dd68a1bf08d559e1))
+
+
+### Bug Fixes
+
+* **search:** fix docsearch support ([2068779](https://github.com/gregberge/smooth-doc/commit/206877910d2f075d41dea74d02211605f25a6de4))
+
+## [10.0.0](https://github.com/gregberge/smooth-doc/compare/v9.0.0...v10.0.0) (2022-10-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* Use new gatsby-plugin-mdx
+
+### Features
+
+* upgrade mdx stack ([8c70317](https://github.com/gregberge/smooth-doc/commit/8c70317b23574e3fb11931da3892d66019d576ed))
+
+## [9.0.0](https://github.com/gregberge/smooth-doc/compare/v8.1.0...v9.0.0) (2022-01-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* requires Gatsby v4
+
+### Bug Fixes
+
+* do not create page & redirect ([ea8a871](https://github.com/gregberge/smooth-doc/commit/ea8a87104c9bd6b3a59c1a7c83961ae742ea2324))
+* fix for broken URLs on the `Edit this page on GitHub` links ([#57](https://github.com/gregberge/smooth-doc/issues/57)) ([bd59037](https://github.com/gregberge/smooth-doc/commit/bd590370a013ab1e9573508728ebc6464e8ce982))
+* fix headers link alignment ([cf352e1](https://github.com/gregberge/smooth-doc/commit/cf352e10e4f63747e829e731793577a615456b54))
+
+
+* upgrade dependencies ([#62](https://github.com/gregberge/smooth-doc/issues/62)) ([6a066bc](https://github.com/gregberge/smooth-doc/commit/6a066bc30aac4af8b974ecbd4a7b142c3acaf816))
+
+## [8.1.0](https://github.com/gregberge/smooth-doc/compare/v8.0.1...v8.1.0) (2021-09-17)
+
+
+### Features
+
+* **DocSearch:** add appId configuration parameter ([#52](https://github.com/gregberge/smooth-doc/issues/52)) ([6af61e7](https://github.com/gregberge/smooth-doc/commit/6af61e7b6ee9715eabc1c6195b8bcf787821b6b3))
+
+### [8.0.1](https://github.com/gregberge/smooth-doc/compare/v8.0.0...v8.0.1) (2021-06-23)
+
+
+### Bug Fixes
+
+* fix previous/back navigation with --prefix-paths ([#48](https://github.com/gregberge/smooth-doc/issues/48)) ([45b96f4](https://github.com/gregberge/smooth-doc/commit/45b96f46e80b97db497201786a8cda7933a18a0e))
+
+## [8.0.0](https://github.com/gregberge/smooth-doc/compare/v7.0.1...v8.0.0) (2021-05-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* use xstyled v3
+
+### Features
+
+* use xstyled v3 ([2346410](https://github.com/gregberge/smooth-doc/commit/2346410a0fbad558149200ce3a8fbc753eb4992a))
+
+### [7.0.1](https://github.com/gregberge/smooth-doc/compare/v7.0.0...v7.0.1) (2021-03-21)
+
+## [7.0.0](https://github.com/gregberge/smooth-doc/compare/v6.1.0...v7.0.0) (2021-03-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Gatsby v3.
+
+See https://www.gatsbyjs.com/docs/reference/release-notes/image-migration-guide/.
+
+### Features
+
+* Gatsby v3 ([58bfdcd](https://github.com/gregberge/smooth-doc/commit/58bfdcd9a14ba8163f6f12c68028dd5afaad69f5))
+
+## [6.1.0](https://github.com/gregberge/smooth-doc/compare/v6.0.1...v6.1.0) (2021-02-17)
+
+
+### Features
+
+* add support for .md files ([#39](https://github.com/gregberge/smooth-doc/issues/39)) ([caaab0d](https://github.com/gregberge/smooth-doc/commit/caaab0d73f55c011abe99ea9d3637ec484e6cdf5)), closes [#37](https://github.com/gregberge/smooth-doc/issues/37)
+
+
+### Bug Fixes
+
+* fix babel plugin xstyled ([cc68dcf](https://github.com/gregberge/smooth-doc/commit/cc68dcff9f8893b15db4869ac4c563a3d965e733))
+
+### [6.0.1](https://github.com/gregberge/smooth-doc/compare/v6.0.0...v6.0.1) (2021-01-25)
+
+
+### Bug Fixes
+
+* replace NETLIFY_ENV by CONTEXT ([f004872](https://github.com/gregberge/smooth-doc/commit/f00487270f3c72d2ef441cdc3af7e06a01d9f304))
+
+## [6.0.0](https://github.com/gregberge/smooth-doc/compare/v5.5.0...v6.0.0) (2021-01-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to xstyled v2, see [xstyled upgrade
+guide](https://xstyled.dev/docs/upgrade-guide/).
+
+### Features
+
+* **docsearch:** use new version ([#36](https://github.com/gregberge/smooth-doc/issues/36)) ([7c92c3c](https://github.com/gregberge/smooth-doc/commit/7c92c3c12a76f8581e066160754685910d954745))
+
+
+### Bug Fixes
+
+* **404:** fix 404 issues ([#35](https://github.com/gregberge/smooth-doc/issues/35)) ([aaf9880](https://github.com/gregberge/smooth-doc/commit/aaf988097d9ce79d29e46c96b66446e0bbf2ea96))
+
+
+* upgrade to xstyled v2 ([#34](https://github.com/gregberge/smooth-doc/issues/34)) ([d4ff649](https://github.com/gregberge/smooth-doc/commit/d4ff6491eb9cc7a6f06d9f58f4ef5714c235cdd2))
+
 ## [5.5.0](https://github.com/gregberge/smooth-doc/compare/v5.4.6...v5.5.0) (2020-12-25)
 
 

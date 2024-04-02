@@ -42,4 +42,5 @@ export const Table = styled.table`
     border-bottom: 1;
     border-color: layout-border;
   }
+  
 `

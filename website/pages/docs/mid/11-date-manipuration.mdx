@@ -7,9 +7,7 @@ order: 11
 
 # 11. Java の日付操作
 
-<p class="goal">
-  それぞれの日付操作のクラスの特徴が分かり、必要に応じて日付操作を、調べながら実装できるようになること
-</p>
+<p className="goal">それぞれの日付操作のクラスの特徴が分かり、必要に応じて日付操作を、調べながら実装できるようになること</p>
 
 ## 学習
 
@@ -26,174 +24,10 @@ Java に用意されている Date クラス、Calendar クラス、LocalDateTim
 「 [java localdatetime クラス](https://www.google.com/search?q=java+localdatetime+クラス) 」などです。
 各 3 種類ぐらい説明記事やサンプルコードを読んで、Java で日付操作をする方法を、ざっとつかみましょう。
 
-また、Java 8 以降であれば、日時の操作はできる限り `java.time.LocalDate` や `java.time.LocalDateTime` を使うようにすることも知っておきましょう。
+各クラスについて現時点で、深く理解する必要はなく、
+それぞれの日付操作のクラスの特徴が分かり、必要に応じて日付操作を、調べながら実装できるようにしておきましょう。
 
-## LocalDateの初期化
-
-日付を作成する場合はいくつかの方法が存在します。
-次のサンプルプログラムでは3種類の方法を紹介しています。
-
-```java
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-public class DateInitializer {
-    
-    public static void main(String[] args) {
-        // 本日の日付を取得
-        LocalDate currentDate = LocalDate.now();
-
-        // 年・月・日を指定して日付を作成
-        LocalDate einsteinBirthdate = LocalDate.of(1879, 3, 14);
-
-        // 文字列から日付を作成
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        LocalDate newtonBirthdate = LocalDate.parse("1642/12/25", formatter);
-
-        System.out.printf("%s : 今日の日付\n", currentDate);
-        System.out.printf("%s : アインシュタインの生年月日\n", einsteinBirthdate);
-        System.out.printf("%s : ニュートンの生年月日\n", newtonBirthdate);
-    }
-}
-```
-
-### DateInitializer.java の実行結果
-
-```console
-2024-03-21 : 今日の日付
-1879-03-14 : アインシュタインの生年月日
-1642-12-25 : ニュートンの生年月日
-```
-
-## LocalDateを使った日付の加算・減算
-
-LocalDateクラスは日付を格納するだけではなく、数日後・数か月後などの日付を求めることもできます。
-
-```java
-import java.time.LocalDate;
-
-public class DateModifier {
-
-    public static void main(String[] args) {
-        LocalDate date = LocalDate.of(2024, 3, 20);
-
-        System.out.printf("初期状態:%s\n\n", date);
-
-        LocalDate oneDaysLater = date.plusDays(1);
-        LocalDate oneWeeksLater = date.plusWeeks(1);
-        LocalDate oneMonthsLater = date.plusMonths(1);
-        LocalDate oneYearLater = date.plusYears(1);
-
-        System.out.println("未来の日付");
-        System.out.printf("1日後の日時  :%s\n", oneDaysLater);
-        System.out.printf("1週間後の日時:%s\n", oneWeeksLater);
-        System.out.printf("1か月後の日時:%s\n", oneMonthsLater);
-        System.out.printf("1年後の日時  :%s\n\n", oneYearLater);
-
-        LocalDate oneDaysEarlier = date.minusDays(1);
-        LocalDate oneWeeksEarlier = date.minusWeeks(1);
-        LocalDate oneMonthsEarlier = date.minusMonths(1);
-        LocalDate oneYearEarlier = date.minusYears(1);
-
-        System.out.println("過去の日付");
-        System.out.printf("1日前の日時  :%s\n", oneDaysEarlier);
-        System.out.printf("1週間前の日時:%s\n", oneWeeksEarlier);
-        System.out.printf("1か月前の日時:%s\n", oneMonthsEarlier);
-        System.out.printf("1年前の日時  :%s\n", oneYearEarlier);
-    }
-}
-```
-
-### DateModifier.java の実行結果
-
-```console
-現在の日時:2024-03-21
-
-未来の日付
-1日後の日時  :2024-03-22
-1週間後の日時:2024-03-28
-1か月後の日時:2024-04-21
-1年後の日時  :2025-03-21
-
-過去の日付
-1日前の日時  :2024-03-20
-1週間前の日時:2024-03-14
-1か月前の日時:2024-02-21
-1年前の日時  :2023-03-21
-```
-
-**注意：実行結果は実行する日の日付によって決まります。**
-
-## 日付を出力
-
-日付を表示する際に、一部の情報だけを表示したり、表示する形式を指定したい場合はあります。
-情報を年・月・日など個別に表示したい場合は情報取得用のメソッドを使います。
-
-月および曜日を表示する際は注意が必要です。例えば、`getMonth()` メソッドを使った場合は、月の英名が表示されます。
-英名ではなく、数値として月を受け取りたい場合は、`getMonth().getValue()` を使うことができます。
-
-|  | 1月 | 2月 | 3月 | 4月 | 5月 | 6月 | 7月 | 8月 | 9月 | 10月 | 11月 | 12月 |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| getMonth() | JANUARY | FEBRUARY | MARCH | APRIL | MAY | JUNE | JULY | AUGUST | SEPTEMBER | OCTOBER | NOVEMBER | DECEMBER |
-|getMonth().getValue() | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
-
-また、曜日についても同じように英名と数値を受け取ることができます。
-LocalDateクラスは月曜日を基準として、「1」からの連番を曜日に割り当てています。
-
-使用するクラスやプログラミング言語によってこの基準が変わりますので、注意が必要です。
-例えば、同じJava言語のDateクラスは日曜日を基準として、「**0**」からの連番を曜日に割り当てています。
-
-|  | 月 | 火 | 水 | 木 | 金 | 土 | 日 |
-| --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| getDayOfWeek() | MONDAY | TUESDAY | WEDNESDAY | THURSDAY | FRIDAY | SATURDAY | SUNDAY |
-| getDayOfWeek().getValue() | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
-
-
-```java
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-public class DatePrinter {
-    public static void main(String[] args) {
-        LocalDate date = LocalDate.of(2024, 3, 18);
-
-        System.out.println("〔日付の分割表示〕");
-        System.out.printf("年: %s\n", date.getYear());
-        System.out.printf("月: %s\n", date.getMonth());
-        System.out.printf("月(数値): %s\n", date.getMonth().getValue());
-        System.out.printf("日: %s\n", date.getDayOfMonth());
-        System.out.printf("曜日: %s\n", date.getDayOfWeek());
-        System.out.printf("曜日(数値): %s\n\n", date.getDayOfWeek().getValue());
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年MM月dd日(E)");
-        String formatedDate = date.format(formatter);
-
-        System.out.println("〔形式を指定して表示〕");
-        System.out.println(formatedDate);
-    }
-}
-```
-
-### DatePrinter.java の実行結果
-
-```console
-〔日付の分割表示〕
-年: 2024
-月: MARCH
-月(数値): 3
-日: 18
-曜日: MONDAY
-曜日(数値): 1
-
-〔形式を指定して表示〕
-2024年03月18日(月)
-```
-
-日付やに日時を表示する場合は、表示形式を指定して表示するこもできます。
-表示形式の指定にはDateTimeFormatterクラスを使います。
-
-表示形式の指定に使えるパターン文字について詳しく知らいたい場合は Web で調べてください。
-検索キーワードは、「 [java datetimeformatter パターン文字](https://www.google.com/search?q=java+datetimeformatter+パターン文字) 」です。
+また、Java 8 以降であれば、日時の操作はできる限り java.time.LocalDate や java.time.LocalDateTime を使うようにすることも知っておきましょう。
 
 ## 練習問題 01: メソッドのオーバーロード（時間: 20 分）
 

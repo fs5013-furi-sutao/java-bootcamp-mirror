@@ -1,14 +1,7 @@
 import React from 'react'
-import styled, {
-  Box,
-  css,
-  up,
-  down,
-  th,
-  useUp,
-} from '@xstyled/styled-components'
-import { useDialogState, Dialog, DialogDisclosure } from 'reakit/Dialog'
-import { Portal } from 'reakit/Portal'
+import styled, { x, css, up, down, th, useUp } from '@xstyled/styled-components'
+import { useDialogState, Dialog, DialogDisclosure } from 'ariakit/dialog'
+import { Portal } from 'ariakit/portal'
 import { VscChevronUp } from 'react-icons/vsc'
 // import { RiPencilLine } from 'react-icons/ri'
 import { ScreenContainer } from './ScreenContainer'
@@ -149,11 +142,11 @@ function MobileSidebar({ children }) {
   const dialog = useDialogState({ animated: true })
   return (
     <>
-      <Dialog {...dialog} as={SidebarDialog}>
+      <Dialog state={dialog} as={SidebarDialog}>
         {children}
       </Dialog>
       <Portal>
-        <DialogDisclosure {...dialog} as={MenuButton}>
+        <DialogDisclosure state={dialog} as={MenuButton}>
           <VscChevronUp />
           <VscChevronUp />
         </DialogDisclosure>
@@ -198,25 +191,24 @@ export function DocLayout({ children, tableOfContents, editLink, ...props }) {
               </MobileSidebar>
             )}
           </div>
-          <Box pb={6} px={3}>
+          <x.div pb={6} px={3}>
             <Article>
               {children}
-              {/* {editLink && (
-                <Box
+              {/*editLink && (
+                <x.a
                   mt={5}
                   display="grid"
                   gridTemplateColumns="min-content max-content"
                   gridGap={1}
                   alignItems="center"
-                  forwardedAs="a"
                   href={editLink}
                 >
                   <RiPencilLine /> Edit this page on GitHub
-                </Box>
-              )} */}
+                </x.a>
+              )*/}
               <PrevNextLinks {...sideNav} />
             </Article>
-          </Box>
+          </x.div>
           <TocContainer>
             <TableOfContents />
           </TocContainer>
