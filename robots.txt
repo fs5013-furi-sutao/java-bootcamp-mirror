@@ -1,3 +1,3 @@
 User-agent: *
-Sitemap: https://fs5013-furi-sutao.github.io/sitemap.xml
+Sitemap: https://fs5013-furi-sutao.github.io/java-bootcamp/sitemap/sitemap-index.xml
 Host: https://fs5013-furi-sutao.github.io
