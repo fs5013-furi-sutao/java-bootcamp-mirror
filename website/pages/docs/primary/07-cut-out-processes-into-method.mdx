@@ -20,6 +20,94 @@ order: 7
 検索キーワードは、「 [java リファクタリング メソッド 抽出](https://www.google.com/search?q=java+リファクタリング+メソッド+抽出) 」です。
 3 種類ぐらい説明記事やサンプルコードを読んで、処理をメソッドに切り出す利点をつかみましょう。
 
+## メソッドの抽出
+
+以下のNumberPrinterクラスは複数の配列の内容を出力します。
+
+プログラムを読めば、2つの配列を出力する処理がほぼ同じ内容だということが分かるはずです。
+異なっているのはどの配列の内容を表示するかだけです。
+このような場合、重複している処理をメソッド化をすることでプログラムの**可読性**と**保守性**を上げることができます。
+
+```java
+public class NumberPrinterBefore {
+    public static void main(String[] args) {
+        int[] ages = {15, 17, 20, 25, 30};
+        int[] scores = {65, 70, 90, 98, 85};
+
+        System.out.println("配列ages");
+
+        System.out.print("[");
+        for(int i = 0;i < ages.length;i++) {
+            System.out.print(ages[i]);
+            
+            boolean isLastElement = (i == ages.length - 1);
+            if(!isLastElement) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+
+        System.out.println();
+        System.out.println("配列scores");
+
+        System.out.print("[");
+        for(int i = 0;i < scores.length;i++) {
+            System.out.print(scores[i]);
+            
+            boolean isLastElement = (i == scores.length - 1);
+            if(!isLastElement) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    }
+}
+```
+
+### リファクタリング後
+
+```java
+public class NumberPrinter {
+
+    public static void main(String[] args) {
+
+        int[] ages = {15, 17, 20, 25, 30};
+        int[] scores = {65, 70, 90, 98, 85};
+
+        System.out.println("配列ages");
+
+        printArray(ages);
+
+        System.out.println();
+        System.out.println("配列scores");
+
+        printArray(scores);
+    }
+
+    private static void printArray(int[] array) {
+        System.out.print("[");
+        for(int i = 0;i < array.length;i++) {
+            System.out.print(array[i]);
+            
+            boolean isLastElement = (i == array.length - 1);
+            if(!isLastElement) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    } 
+}
+
+```
+
+```
+配列ages
+[15, 17, 20, 25, 30]
+
+配列scores
+[65, 70, 90, 98, 85]
+```
+
 ## 練習問題: メソッドの抽出（時間: 20 分）
 
 以下のクラス SquarePrinter について、次の 6 つのメソッドを切り出しなさい
